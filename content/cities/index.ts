@@ -16,11 +16,11 @@ import { ahmedabad } from "./ahmedabad";
 import { kashmir } from "./kashmir";
 
 export const cities: City[] = [
-  hyderabad,
   bengaluru,
-  chennai,
-  delhi,
   mumbai,
+  chennai,
+  hyderabad,
+  delhi,
   pune,
   vadodara,
   ahmedabad,

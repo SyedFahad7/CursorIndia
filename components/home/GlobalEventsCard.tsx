@@ -26,7 +26,7 @@ export async function GlobalEventsCard() {
             href={lumaUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="group mt-1 inline-flex w-fit items-center gap-1 text-sm font-medium text-[#F47F47] transition-[opacity,text-decoration] hover:underline hover:opacity-90 underline-offset-4"
+            className="group mt-1 inline-flex w-fit items-center gap-1 text-sm font-medium text-[var(--color-coral)] transition-[opacity,text-decoration] hover:underline hover:opacity-90 underline-offset-4"
           >
             {t.cta}
             <ArrowUpRight

@@ -20,7 +20,7 @@ export async function CityCard({ city }: CityCardProps) {
     <Card className="h-full">
       <Link
         href={`/cities/${city.slug}`}
-        className="relative flex h-full min-h-[104px] flex-col justify-center gap-1.5 p-5 pr-16 md:p-6 md:pr-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] rounded-[var(--radius-lg)]"
+        className="group relative flex h-full min-h-[104px] flex-col justify-center gap-1.5 p-5 pr-16 md:p-6 md:pr-20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] rounded-[var(--radius-lg)]"
       >
         <Heading level={3} size="md" className="leading-tight">
           {localizedName(city, locale)}
@@ -33,7 +33,7 @@ export async function CityCard({ city }: CityCardProps) {
         <ArrowCircleRight
           aria-hidden
           strokeWidth={0.5}
-          className="pointer-events-none absolute right-3 top-1/2 h-14 w-14 -translate-y-1/2 -rotate-45 text-[var(--color-muted)] md:right-4 md:h-16 md:w-16"
+          className="pointer-events-none absolute right-3 top-1/2 h-14 w-14 -translate-y-1/2 -rotate-45 text-[var(--color-muted)] transition-transform duration-200 ease-out group-hover:rotate-0 md:right-4 md:h-16 md:w-16"
         />
       </Link>
     </Card>

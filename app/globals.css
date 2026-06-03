@@ -28,6 +28,8 @@
   --color-accent: #fafafa;
   --color-accent-soft: rgba(255, 255, 255, 0.06);
   --color-accent-hover: #e5e5e5;
+  /* Coral links — section CTAs, locale toggle, global Luma link */
+  --color-coral: #f47f47;
 
   --color-success: #22c55e;
   --color-warning: #eab308;

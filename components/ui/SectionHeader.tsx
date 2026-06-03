@@ -45,10 +45,13 @@ export function SectionHeader({
       {cta ? (
         <Link
           href={cta.href}
-          className="inline-flex items-center gap-1 text-sm font-medium text-[var(--color-muted)] hover:text-[var(--color-text)] transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] rounded"
+          className="group inline-flex items-center gap-1 text-sm font-medium text-[var(--color-coral)] transition-[opacity,text-decoration] hover:underline hover:opacity-90 underline-offset-4 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)] focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--color-bg)] rounded"
         >
           {cta.label}
-          <ArrowRight className="h-4 w-4" aria-hidden />
+          <ArrowRight
+            className="h-4 w-4 transition-transform duration-200 ease-out group-hover:-rotate-45"
+            aria-hidden
+          />
         </Link>
       ) : null}
     </div>

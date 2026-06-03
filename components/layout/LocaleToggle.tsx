@@ -29,7 +29,7 @@ export function LocaleToggle() {
       <span
         className={
           locale === "en"
-            ? "text-[var(--color-text)]"
+            ? "text-[var(--color-coral)]"
             : "text-[var(--color-subtle)]"
         }
       >
@@ -41,7 +41,7 @@ export function LocaleToggle() {
       <span
         className={
           locale === "hi"
-            ? "text-[var(--color-text)]"
+            ? "text-[var(--color-coral)]"
             : "text-[var(--color-subtle)]"
         }
       >
