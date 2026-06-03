@@ -4,13 +4,13 @@ import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
 import { ThemedLogo } from "@/components/ui/ThemedLogo";
+import { PhotoCarousel } from "@/components/home/PhotoCarousel";
+import { signatureFont } from "@/lib/fonts/signature";
 import { getDict } from "@/lib/i18n/server";
 
 // The closing section of the home page. A short, hand-written welcome from the
-// APAC region lead. Kept deliberately plain: no marketing copy, no rhyming, no
-// dashes. The signature is an inline SVG that falls back to a system cursive
-// font so it works without shipping a font file. Swap in a real handwritten
-// signature later by replacing <SignatureMark /> with a regular <Image />.
+// APAC region lead. Swap <SignatureMark /> for a PNG at
+// /public/images/signatures/mohammed-sanjeed.png when you have a scan.
 
 export async function LetterFromAPAC() {
   const dict = await getDict();
@@ -69,39 +69,18 @@ export async function LetterFromAPAC() {
           </div>
         </article>
       </Container>
+      <PhotoCarousel />
     </section>
   );
 }
 
-/**
- * Placeholder signature mark. Renders a stylized "Sanjeed" using a system
- * cursive font so it doesn't require shipping a webfont or a PNG.
- *
- * To replace with a real scanned signature, drop a transparent PNG at
- * /public/images/signatures/mohammed-sanjeed.png and swap this for:
- *   <Image src="/images/signatures/mohammed-sanjeed.png" alt="" width={240} height={60} className="h-14 w-auto" />
- */
 function SignatureMark() {
   return (
-    <svg
-      viewBox="0 0 240 64"
-      className="h-14 w-auto text-[var(--color-text)]"
+    <p
       aria-hidden
-      focusable="false"
+      className={`${signatureFont.className} text-[2.5rem] leading-none tracking-wide text-[var(--color-text)] md:text-[2.75rem]`}
     >
-      <text
-        x="0"
-        y="46"
-        fill="currentColor"
-        style={{
-          fontFamily:
-            "'Snell Roundhand', 'Apple Chancery', 'Lucida Handwriting', 'Brush Script MT', cursive",
-          fontSize: "42px",
-          fontStyle: "italic",
-        }}
-      >
-        Sanjeed
-      </text>
-    </svg>
+      Sanjeed
+    </p>
   );
 }

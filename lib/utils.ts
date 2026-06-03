@@ -87,7 +87,7 @@ export function relativeFromNow(iso: string): string {
 export function archetypeLabel(a: "cafe" | "workshop" | "meetup" | "hackathon"): string {
   switch (a) {
     case "cafe":
-      return "Cafe Cursor";
+      return "Café Cursor";
     case "workshop":
       return "Workshop";
     case "meetup":

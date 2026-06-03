@@ -15,27 +15,6 @@ const LUMA_ICS_BASE = "https://api.lu.ma/ics/get?entity=calendar&id=";
 const REVALIDATE_SECONDS = 60 * 60 * 6;
 
 /**
- * Some local-dev machines (Windows with incomplete CA bundles, corporate MITM,
- * etc.) can't verify Luma's TLS cert from Node's bundled fetch even though
- * Luma's cert is fine in any browser. We log and relax verification, **only in
- * dev**, so the local site can pull events. Production builds keep strict TLS.
- */
-let tlsRelaxLogged = false;
-function maybeRelaxTlsInDev(): void {
-  if (process.env.NODE_ENV === "production") return;
-  if (process.env.NODE_TLS_REJECT_UNAUTHORIZED === "0") return;
-  process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
-  if (!tlsRelaxLogged) {
-    tlsRelaxLogged = true;
-    console.warn(
-      "[luma] dev: relaxing TLS verification for outbound fetches (api.lu.ma). " +
-        "This is a dev-only workaround for Node's incomplete CA store on Windows. " +
-        "Production builds keep strict TLS.",
-    );
-  }
-}
-
-/**
  * Derive an event archetype from the title alone (Luma doesn't have a
  * structured field for this). Defaults to "meetup".
  */
@@ -130,7 +109,6 @@ function toCursorEvent(ics: IcsEvent, city: City): CursorIndiaEvent | null {
 export async function fetchCityLumaEvents(city: City): Promise<CursorIndiaEvent[]> {
   if (!city.lumaCalendarId) return [];
 
-  maybeRelaxTlsInDev();
   const url = `${LUMA_ICS_BASE}${encodeURIComponent(city.lumaCalendarId)}`;
 
   try {

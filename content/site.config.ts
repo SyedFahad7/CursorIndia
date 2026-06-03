@@ -4,7 +4,7 @@ export const siteConfig: SiteConfig = {
   name: "Cursor India",
   shortName: "Cursor India",
   description:
-    "A community of builders shipping with Cursor across India. Cafe Cursor, workshops, meetups, and hackathons in cities across the country.",
+    "A community of builders shipping with Cursor across India. Café Cursor, workshops, meetups, and hackathons in cities across the country.",
   url: "https://cursor-india.vercel.app",
   email: "msanjeed5@gmail.com",
   social: {
@@ -18,6 +18,7 @@ export const siteConfig: SiteConfig = {
     telegram: "https://t.me/REPLACE_ME",
     forum: "https://forum.cursor.com",
     luma: "https://lu.ma/cursor-india",
+    lumaGlobal: "https://lu.ma/cursorcommunity",
   },
   cursorOfficial: {
     site: "https://cursor.com",

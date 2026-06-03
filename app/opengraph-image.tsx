@@ -17,7 +17,7 @@ export default function OG() {
           justifyContent: "space-between",
           padding: 64,
           background:
-            "radial-gradient(60% 50% at 20% 0%, rgba(255,255,255,0.06) 0%, transparent 60%), #0a0a0b",
+            "radial-gradient(60% 50% at 20% 0%, rgba(255,255,255,0.06) 0%, transparent 60%), #1b1b1b",
           color: "#fafafa",
           fontFamily: "system-ui, sans-serif",
         }}
@@ -67,7 +67,7 @@ export default function OG() {
             Build with Cursor in India.
           </span>
           <span style={{ fontSize: 26, color: "#a1a1aa", lineHeight: 1.4 }}>
-            Cafe Cursor, workshops, meetups, and hackathons across Indian cities.
+            Café Cursor, workshops, meetups, and hackathons across Indian cities.
           </span>
         </div>
 

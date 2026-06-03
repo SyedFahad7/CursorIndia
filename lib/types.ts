@@ -130,6 +130,8 @@ export interface SiteConfig {
     telegram?: string;
     forum?: string;
     luma?: string;
+    /** Global Cursor community calendar on Luma (all regions). */
+    lumaGlobal?: string;
   };
   cursorOfficial: {
     site: string;

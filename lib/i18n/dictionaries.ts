@@ -110,10 +110,37 @@ export interface Dict {
     title: string;
     cta: string;
   };
+  photoCarousel: {
+    eyebrow: string;
+    title: string;
+    subhead: string;
+    cta: string;
+    sectionAria: string;
+  };
   letter: {
     heading: string;
     paragraphs: readonly string[];
     role: string;
+  };
+  globalEvents: {
+    title: string;
+    body: string;
+    cta: string;
+  };
+  faq: {
+    heading: string;
+    items: readonly {
+      question: string;
+      parts: readonly (
+        | { type: "text"; value: string }
+        | {
+            type: "link";
+            label: string;
+            href: string;
+            external?: boolean;
+          }
+      )[];
+    }[];
   };
   common: {
     cursorAmbassador: string;
@@ -318,7 +345,7 @@ const en: Dict = {
   },
   meta: {
     description:
-      "A community of builders shipping with Cursor across India. Cafe Cursor, workshops, meetups, and hackathons in cities across the country.",
+      "A community of builders shipping with Cursor across India. Café Cursor, workshops, meetups, and hackathons in cities across the country.",
     titleSuffix: "Build with Cursor in India",
   },
   footer: {
@@ -409,6 +436,14 @@ const en: Dict = {
     title: "Cursor Ambassadors across India",
     cta: "All ambassadors",
   },
+  photoCarousel: {
+    eyebrow: "Gallery",
+    title: "Moments from the community",
+    subhead:
+      "Meetups, workshops, and hackathons across India — a quiet scroll through what we build together.",
+    cta: "View gallery",
+    sectionAria: "Photos from Cursor India events",
+  },
   letter: {
     heading: "Hey Builder,",
     paragraphs: [
@@ -424,6 +459,61 @@ const en: Dict = {
     ],
     role: "Cursor APAC Region Lead",
   },
+  globalEvents: {
+    title: "Cursor Community events globally",
+    body: "Cursor community events around the world. Find a meetup or café near you.",
+    cta: "All events on Luma",
+  },
+  faq: {
+    heading: "Frequently asked questions",
+    items: [
+      {
+        question: "What is Cursor India?",
+        parts: [
+          {
+            type: "text",
+            value:
+              "Cursor India is an unofficial, community-run hub for meetups, hackathons, and recaps centred on the Cursor AI code editor in India. We are not affiliated with Anysphere (the maker of Cursor) or with any other entity using the Cursor name.",
+          },
+        ],
+      },
+      {
+        question: "Is this the official Cursor website?",
+        parts: [
+          {
+            type: "text",
+            value: "No. The official Cursor product website is ",
+          },
+          {
+            type: "link",
+            label: "cursor.com",
+            href: "https://cursor.com",
+            external: true,
+          },
+          {
+            type: "text",
+            value:
+              ". This site is run by community ambassadors and volunteers based in India. All trademarks belong to their respective owners.",
+          },
+        ],
+      },
+      {
+        question: "How do I attend a Cursor India event?",
+        parts: [
+          {
+            type: "text",
+            value: "Browse upcoming events on the ",
+          },
+          { type: "link", label: "Events", href: "/events" },
+          {
+            type: "text",
+            value:
+              " page or open Luma. Most events are free and on-site in Indian cities. Hosts are ambassadors in your city; details are listed on each event card.",
+          },
+        ],
+      },
+    ],
+  },
   common: {
     cursorAmbassador: "Cursor Ambassador",
     eventDetails: "Event details",
@@ -437,7 +527,7 @@ const en: Dict = {
     events: {
       title: "Events",
       metaDesc:
-        "All Cursor India events: Cafe Cursor, workshops, meetups, and hackathons across Indian cities.",
+        "All Cursor India events: Café Cursor, workshops, meetups, and hackathons across Indian cities.",
       lead: "Events across Indian cities. Free unless we say otherwise. Bring your laptop and what you're currently building.",
       upcomingHeading: "Upcoming",
       pastHeading: "Past events",
@@ -507,7 +597,7 @@ const en: Dict = {
     gallery: {
       title: "Gallery",
       metaDesc: "Photos from Cursor India events across the country.",
-      lead: "Faces, demos, and the occasional whiteboard from Cafe Cursor, workshops, meetups, and hackathons across India.",
+      lead: "Faces, demos, and the occasional whiteboard from Café Cursor, workshops, meetups, and hackathons across India.",
       emptyPrefix: "No photos yet — drop images under",
       emptySuffix: "and they'll appear here automatically.",
       eventDetails: "Event details →",
@@ -519,11 +609,11 @@ const en: Dict = {
       lead: "Cursor India is the local chapter for builders shipping with Cursor across the country. We run the same kinds of events you will find in 200+ cities worldwide — free, casual, and open to everyone.",
       globalHeading: "Part of a global community",
       globalBody:
-        "Cursor's community spans 80+ countries with 700+ events hosted by 300+ ambassadors. From Cafe Cursor in Austin to hackathons in Berlin, Madrid, and Istanbul, the format is the same everywhere: bring your laptop, build together, meet other developers, and share what you ship. India is one chapter in that network — Bengaluru, Delhi, Mumbai, Hyderabad, and more.",
+        "Cursor's community spans 80+ countries with 700+ events hosted by 300+ ambassadors. From Café Cursor in Austin to hackathons in Berlin, Madrid, and Istanbul, the format is the same everywhere: bring your laptop, build together, meet other developers, and share what you ship. India is one chapter in that network — Bengaluru, Delhi, Mumbai, Hyderabad, and more.",
       whatHeading: "Events we run",
       whatBody: {
         intro: "Four formats, aligned with cursor.com/community:",
-        cafe: "Cafe Cursor",
+        cafe: "Café Cursor",
         cafeDesc:
           "We take over a cafe or co-working space for the day. Build with local Cursor users, grab coffee and Cursor credits, and meet the community. No formal agenda — just bring your laptop and whatever you are working on.",
         workshops: "Workshops",
@@ -608,7 +698,7 @@ const en: Dict = {
         "Cursor India is committed to a safe, inclusive, and respectful environment. Treat everyone with respect and avoid discrimination. Unacceptable behavior includes harassment, offensive comments, unwelcome sexual attention, disruptions, and sharing private information without consent. Violations may lead to removal from the event. By participating, you agree to follow this Code of Conduct. Report issues to event organizers or email at",
       introHeading: "Introduction",
       introBody:
-        "At Cursor India, we are dedicated to providing a safe, welcoming, and inclusive space for all participants regardless of gender, sexual orientation, disability, physical appearance, body size, race, ethnicity, religion, or technology choices. We do not tolerate harassment of participants in any form. This Code of Conduct applies to all Cursor India events — Cafe Cursor sessions, workshops, meetups, hackathons, community gatherings — and online spaces including WhatsApp. By participating, you agree to follow this Code of Conduct.",
+        "At Cursor India, we are dedicated to providing a safe, welcoming, and inclusive space for all participants regardless of gender, sexual orientation, disability, physical appearance, body size, race, ethnicity, religion, or technology choices. We do not tolerate harassment of participants in any form. This Code of Conduct applies to all Cursor India events — Café Cursor sessions, workshops, meetups, hackathons, community gatherings — and online spaces including WhatsApp. By participating, you agree to follow this Code of Conduct.",
       expectedHeading: "Expected behavior",
       expectedItems: [
         {
@@ -696,7 +786,7 @@ const hi: Dict = {
   },
   meta: {
     description:
-      "Cursor के साथ बनाने वालों की कम्युनिटी, भारत भर में। Cafe Cursor, वर्कशॉप, मीटअप और हैकाथॉन देश भर के शहरों में।",
+      "Cursor के साथ बनाने वालों की कम्युनिटी, भारत भर में। Café Cursor, वर्कशॉप, मीटअप और हैकाथॉन देश भर के शहरों में।",
     titleSuffix: "भारत में Cursor के साथ बनाएं",
   },
   footer: {
@@ -787,6 +877,14 @@ const hi: Dict = {
     title: "भारत भर के Cursor एंबेसडर",
     cta: "सभी एंबेसडर",
   },
+  photoCarousel: {
+    eyebrow: "गैलरी",
+    title: "कम्युनिटी के पल",
+    subhead:
+      "भारत भर के मीटअप, वर्कशॉप और हैकाथॉन — जो हम साथ में बनाते हैं उसकी एक शांत झलक।",
+    cta: "गैलरी देखें",
+    sectionAria: "Cursor India इवेंट्स की फ़ोटो",
+  },
   letter: {
     heading: "हे बिल्डर,",
     paragraphs: [
@@ -802,6 +900,57 @@ const hi: Dict = {
     ],
     role: "Cursor APAC रीजन लीड",
   },
+  globalEvents: {
+    title: "वैश्विक Cursor कम्युनिटी इवेंट्स",
+    body: "दुनिया भर के Cursor कम्युनिटी इवेंट्स। अपने पास मीटअप या Café Cursor खोजें।",
+    cta: "Luma पर सभी इवेंट्स",
+  },
+  faq: {
+    heading: "अक्सर पूछे जाने वाले सवाल",
+    items: [
+      {
+        question: "Cursor India क्या है?",
+        parts: [
+          {
+            type: "text",
+            value:
+              "Cursor India एक अनौपचारिक, कम्युनिटी-चलित हब है — भारत में Cursor AI कोड एडिटर पर केंद्रित मीटअप, हैकाथॉन और रीकैप के लिए। हम Anysphere (Cursor के निर्माता) या Cursor नाम का इस्तेमाल करने वाली किसी अन्य संस्था से जुड़े नहीं हैं।",
+          },
+        ],
+      },
+      {
+        question: "क्या यह आधिकारिक Cursor वेबसाइट है?",
+        parts: [
+          {
+            type: "text",
+            value: "नहीं। आधिकारिक Cursor प्रोडक्ट वेबसाइट ",
+          },
+          {
+            type: "link",
+            label: "cursor.com",
+            href: "https://cursor.com",
+            external: true,
+          },
+          {
+            type: "text",
+            value:
+              " है। यह साइट भारत में कम्युनिटी एंबेसडर और वॉलंटियर्स द्वारा चलाई जाती है। सभी ट्रेडमार्क उनके संबंधित मालिकों के हैं।",
+          },
+        ],
+      },
+      {
+        question: "Cursor India इवेंट में कैसे शामिल हूँ?",
+        parts: [
+          { type: "link", label: "इवेंट्स", href: "/events" },
+          {
+            type: "text",
+            value:
+              " पेज पर आगे आने वाले इवेंट्स देखें या Luma खोलें। ज़्यादातर इवेंट्स भारतीय शहरों में फ्री और ऑन-साइट होते हैं। होस्ट आपके शहर के एंबेसडर होते हैं; डिटेल्स हर इवेंट कार्ड पर दी होती हैं।",
+          },
+        ],
+      },
+    ],
+  },
   common: {
     cursorAmbassador: "Cursor एंबेसडर",
     eventDetails: "इवेंट डिटेल्स",
@@ -815,7 +964,7 @@ const hi: Dict = {
     events: {
       title: "इवेंट्स",
       metaDesc:
-        "Cursor India के सभी इवेंट्स: Cafe Cursor, वर्कशॉप, मीटअप और हैकाथॉन, भारत के शहरों में।",
+        "Cursor India के सभी इवेंट्स: Café Cursor, वर्कशॉप, मीटअप और हैकाथॉन, भारत के शहरों में।",
       lead: "भारत के शहरों में पब्लिक इवेंट्स। जब तक हम न कहें, सब फ्री हैं। अपना लैपटॉप लाएं और जो भी अभी बना रहे हैं वो भी।",
       upcomingHeading: "आगे आने वाले",
       pastHeading: "पिछले इवेंट्स",
@@ -885,7 +1034,7 @@ const hi: Dict = {
     gallery: {
       title: "गैलरी",
       metaDesc: "देश भर के Cursor India इवेंट्स की फ़ोटो।",
-      lead: "Cafe Cursor, वर्कशॉप, मीटअप और हैकाथॉन से चेहरे, डेमो और कभी कभार व्हाइटबोर्ड भी, भारत भर से।",
+      lead: "Café Cursor, वर्कशॉप, मीटअप और हैकाथॉन से चेहरे, डेमो और कभी कभार व्हाइटबोर्ड भी, भारत भर से।",
       emptyPrefix: "अभी कोई फ़ोटो नहीं — इस पाथ के नीचे इमेज डालें",
       emptySuffix: "और वो अपने आप यहाँ दिख जाएँगी।",
       eventDetails: "इवेंट डिटेल्स →",
@@ -897,11 +1046,11 @@ const hi: Dict = {
       lead: "Cursor India देश भर में Cursor के साथ बनाने वालों का स्थानीय चैप्टर है। हम वही तरह के इवेंट्स चलाते हैं जो दुनिया भर के 200+ शहरों में होते हैं — फ्री, आरामदायक, और सबके लिए खुले।",
       globalHeading: "वैश्विक कम्युनिटी का हिस्सा",
       globalBody:
-        "Cursor की कम्युनिटी 80+ देशों में फैली है — 300+ एंबेसडर्स द्वारा 700+ इवेंट्स। Austin में Cafe Cursor से लेकर Berlin, Madrid और Istanbul में हैकाथॉन तक, फ़ॉर्मेट हर जगह एक जैसा है: लैपटॉप लाएं, साथ में बनाएं, दूसरे डेवलपर्स से मिलें, और जो शिप करें उसे साझा करें। India उस नेटवर्क का एक चैप्टर है — Bengaluru, Delhi, Mumbai, Hyderabad और भी।",
+        "Cursor की कम्युनिटी 80+ देशों में फैली है — 300+ एंबेसडर्स द्वारा 700+ इवेंट्स। Austin में Café Cursor से लेकर Berlin, Madrid और Istanbul में हैकाथॉन तक, फ़ॉर्मेट हर जगह एक जैसा है: लैपटॉप लाएं, साथ में बनाएं, दूसरे डेवलपर्स से मिलें, और जो शिप करें उसे साझा करें। India उस नेटवर्क का एक चैप्टर है — Bengaluru, Delhi, Mumbai, Hyderabad और भी।",
       whatHeading: "हम जो इवेंट्स चलाते हैं",
       whatBody: {
         intro: "चार फ़ॉर्मेट, cursor.com/community के अनुरूप:",
-        cafe: "Cafe Cursor",
+        cafe: "Café Cursor",
         cafeDesc:
           "हम पूरे दिन के लिए कैफ़े या को-वर्किंग स्पेस लेते हैं। स्थानीय Cursor यूज़र्स के साथ बनाएं, कॉफ़ी और Cursor credits लें, और कम्युनिटी से मिलें। कोई फ़ॉर्मल एजेंडा नहीं — बस लैपटॉप और जो भी प्रोजेक्ट चल रहा हो, लेकर आएं।",
         workshops: "वर्कशॉप",
@@ -986,7 +1135,7 @@ const hi: Dict = {
         "Cursor India एक सुरक्षित, समावेशी और सम्मानजनक माहौल के लिए प्रतिबद्ध है। सभी के साथ सम्मान से पेश आएं और भेदभाव से बचें। अस्वीकार्य व्यवहार में उत्पीड़न, आपत्तिजनक टिप्पणियाँ, अवांछित यौन ध्यान, व्यवधान और बिना सहमति के निजी जानकारी साझा करना शामिल है। उल्लंघन पर इवेंट से हटाया जा सकता है। भाग लेकर आप इस कोड ऑफ कंडक्ट का पालन करने से सहमत हैं। इवेंट ऑर्गनाइज़र्स से संपर्क करें या इस पते पर ईमेल करें",
       introHeading: "परिचय",
       introBody:
-        "Cursor India सभी प्रतिभागियों के लिए — लिंग, यौन अभिविन्यास, विकलांगता, शारीरिक रूप, शरीर का आकार, नस्ल, जाति, धर्म या तकनीकी पसंद की परवाह किए बिना — एक सुरक्षित, स्वागत योग्य और समावेशी स्थान प्रदान करने के लिए प्रतिबद्ध है। हम किसी भी रूप में उत्पीड़न बर्दाश्त नहीं करते। यह कोड ऑफ कंडक्ट सभी Cursor India इवेंट्स — Cafe Cursor, वर्कशॉप, मीटअप, हैकाथॉन, कम्युनिटी गैदरिंग — और WhatsApp सहित ऑनलाइन स्पेस पर लागू होता है। भाग लेकर आप इस कोड का पालन करने से सहमत हैं।",
+        "Cursor India सभी प्रतिभागियों के लिए — लिंग, यौन अभिविन्यास, विकलांगता, शारीरिक रूप, शरीर का आकार, नस्ल, जाति, धर्म या तकनीकी पसंद की परवाह किए बिना — एक सुरक्षित, स्वागत योग्य और समावेशी स्थान प्रदान करने के लिए प्रतिबद्ध है। हम किसी भी रूप में उत्पीड़न बर्दाश्त नहीं करते। यह कोड ऑफ कंडक्ट सभी Cursor India इवेंट्स — Café Cursor, वर्कशॉप, मीटअप, हैकाथॉन, कम्युनिटी गैदरिंग — और WhatsApp सहित ऑनलाइन स्पेस पर लागू होता है। भाग लेकर आप इस कोड का पालन करने से सहमत हैं।",
       expectedHeading: "अपेक्षित व्यवहार",
       expectedItems: [
         {

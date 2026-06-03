@@ -36,7 +36,7 @@ export async function generateMetadata(): Promise<Metadata> {
       "Chennai",
       "meetup",
       "hackathon",
-      "Cafe Cursor",
+      "Café Cursor",
     ],
     openGraph: {
       type: "website",
@@ -60,7 +60,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#0a0a0b" },
+    { media: "(prefers-color-scheme: dark)", color: "#1b1b1b" },
     { media: "(prefers-color-scheme: light)", color: "#fafafa" },
   ],
   width: "device-width",

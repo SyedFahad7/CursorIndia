@@ -17,7 +17,7 @@ export async function StatStrip() {
   return (
     <section
       aria-label={t.sectionAria}
-      className="border-y border-[var(--color-border)] py-6 md:py-8"
+      className="py-6 md:py-8"
     >
       <div className="mx-auto grid w-full max-w-6xl grid-cols-3 gap-6 px-4 md:px-6 lg:px-8">
         {stats.map((s) => (

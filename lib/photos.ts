@@ -4,7 +4,7 @@
 
 import "server-only";
 
-import { readdirSync, statSync } from "node:fs";
+import { existsSync, readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 import type { CursorIndiaEvent, EventPhoto } from "@/lib/types";
@@ -50,7 +50,7 @@ export function getEventGallery(event: CursorIndiaEvent): EventPhoto[] {
 
 /**
  * Walks every event folder under /public/images/events/ and returns every
- * non-hero photo. Used by the home-page marquee. Returns [] if the folder
+ * non-hero photo. Used by the home-page carousel. Returns [] if the folder
  * is missing or empty.
  */
 export function getAllEventPhotos(): EventPhoto[] {
@@ -86,6 +86,57 @@ export function getAllEventPhotos(): EventPhoto[] {
   }
   return out.sort((a, b) => a.src.localeCompare(b.src));
 }
+
+const CAROUSEL_SLOTS = ["01", "02", "03", "04", "05", "06"] as const;
+
+function resolveCarouselImage(index: string): string | null {
+  for (const ext of ["jpg", "jpeg", "png", "webp", "avif"]) {
+    const abs = join(
+      process.cwd(),
+      "public",
+      "images",
+      "carousel",
+      `${index}.${ext}`,
+    );
+    if (existsSync(abs)) return `/images/carousel/${index}.${ext}`;
+  }
+  return null;
+}
+
+export interface CarouselSlide {
+  key: string;
+  src: string | null;
+  alt: string;
+  /** Shown when src is missing — e.g. /images/carousel/01.jpg */
+  placeholderLabel: string;
+}
+
+/** Always six slots (01–06). Missing files keep placeholder labels visible. */
+export function getCarouselFolderSlides(): CarouselSlide[] {
+  return CAROUSEL_SLOTS.map((i) => ({
+    key: i,
+    src: resolveCarouselImage(i),
+    alt: `Cursor India event photo ${i}`,
+    placeholderLabel: `/images/carousel/${i}.jpg`,
+  }));
+}
+
+/** Home carousel — event gallery first, else numbered carousel folder. */
+export function getCarouselSlides(): CarouselSlide[] {
+  const events = getAllEventPhotos();
+  if (events.length > 0) {
+    return events.map((photo, i) => ({
+      key: `event-${i}-${photo.src}`,
+      src: photo.src,
+      alt: photo.alt,
+      placeholderLabel: photo.src,
+    }));
+  }
+  return getCarouselFolderSlides();
+}
+
+/** @deprecated Use getCarouselSlides */
+export { getCarouselSlides as getCarouselPhotos };
 
 /** Returns the hero image path for an event, falling back to /public/images/events/<slug>/hero.*. */
 export function getEventHero(event: CursorIndiaEvent): string | undefined {

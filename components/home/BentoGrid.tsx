@@ -30,9 +30,14 @@ function resolveSrc(i: string): string | null {
   return null;
 }
 
-export function BentoGrid() {
+export function BentoGrid({ className }: { className?: string }) {
   return (
-    <div className="grid grid-cols-2 gap-2 md:grid-cols-4 md:auto-rows-[7rem] lg:auto-rows-[8rem] xl:auto-rows-[9rem]">
+    <div
+      className={cn(
+        "grid grid-cols-2 gap-2 md:grid-cols-4 md:auto-rows-[7rem] lg:auto-rows-[8rem] xl:auto-rows-[9rem]",
+        className,
+      )}
+    >
       {tiles.map((t) => {
         const src = resolveSrc(t.i);
         return (
