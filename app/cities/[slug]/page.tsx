@@ -1,0 +1,136 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import Link from "next/link";
+import { ArrowUpRight, Calendar } from "lucide-react";
+
+import { Container } from "@/components/ui/Container";
+import { Heading } from "@/components/ui/Heading";
+import { Text } from "@/components/ui/Text";
+import { Card } from "@/components/ui/Card";
+import { EventCard } from "@/components/events/EventCard";
+import { AmbassadorCard } from "@/components/ambassadors/AmbassadorCard";
+import { cities, getCityBySlug } from "@/content/cities";
+import { getAmbassadorsByCity } from "@/content/ambassadors";
+import { getEventsByCity } from "@/lib/events";
+import { getDict, getServerLocale } from "@/lib/i18n/server";
+import { localizedName } from "@/lib/i18n/names";
+
+export const revalidate = 21600;
+
+export function generateStaticParams() {
+  return cities.map((c) => ({ slug: c.slug }));
+}
+
+interface PageProps {
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const city = getCityBySlug(slug);
+  const [dict, locale] = await Promise.all([getDict(), getServerLocale()]);
+  if (!city) return { title: dict.pages.cityDetail.notFound };
+  const cityName = localizedName(city, locale);
+  return {
+    title: `${dict.pages.cityDetail.cursorPrefix} ${cityName}`,
+    description: dict.pages.cityDetail.metaDesc(cityName),
+  };
+}
+
+export default async function CityDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const city = getCityBySlug(slug);
+  if (!city) notFound();
+
+  const [dict, locale] = await Promise.all([getDict(), getServerLocale()]);
+  const t = dict.pages.cityDetail;
+  const cityName = localizedName(city, locale);
+
+  const cityAmbassadors = getAmbassadorsByCity(city.slug);
+  const cityEvents = (await getEventsByCity(city.slug)).sort((a, b) =>
+    a.date.localeCompare(b.date),
+  );
+  const upcoming = cityEvents.filter((e) => e.status === "upcoming");
+  const past = cityEvents.filter((e) => e.status === "past");
+
+  return (
+    <>
+      <section className="py-12 md:py-16">
+        <Container width="wide" className="flex flex-col gap-5">
+          <Link
+            href="/cities"
+            className="text-sm text-[var(--color-muted)] hover:text-[var(--color-text)] w-fit"
+          >
+            {t.back}
+          </Link>
+          <Heading level={1} size="xl">
+            {t.cursorPrefix} {cityName}
+          </Heading>
+        </Container>
+      </section>
+
+      {cityAmbassadors.length > 0 ? (
+        <section className="py-6 md:py-10">
+          <Container width="wide" className="flex flex-col gap-6">
+            <Heading level={2} size="md">
+              {t.ambassadorsHeading}
+            </Heading>
+            <div className="grid grid-cols-1 items-stretch gap-4 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 [&>*]:min-h-0">
+              {cityAmbassadors.map((a) => (
+                <AmbassadorCard key={a.handle} ambassador={a} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
+
+      <section className="py-12 md:py-16">
+        <Container width="wide" className="flex flex-col gap-6">
+          <Heading level={2} size="md">
+            {t.upcomingHeading(cityName)}
+          </Heading>
+          {upcoming.length === 0 ? (
+            <Card className="p-8 text-center">
+              <Text variant="muted">{t.emptyUpcoming}</Text>
+            </Card>
+          ) : (
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {upcoming.map((e) => (
+                <EventCard key={e.slug} event={e} />
+              ))}
+            </div>
+          )}
+          {city.links?.luma ? (
+            <div className="flex justify-end">
+              <a
+                href={city.links.luma}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-sm font-medium text-[var(--color-muted)] hover:text-[var(--color-text)] hover:underline underline-offset-4"
+              >
+                <Calendar className="h-4 w-4 shrink-0" aria-hidden />
+                {t.subscribeUpdates}
+                <ArrowUpRight className="h-4 w-4 shrink-0" aria-hidden />
+              </a>
+            </div>
+          ) : null}
+        </Container>
+      </section>
+
+      {past.length > 0 ? (
+        <section className="pb-16 md:pb-20">
+          <Container width="wide" className="flex flex-col gap-6">
+            <Heading level={2} size="md">
+              {t.pastHeading(cityName)}
+            </Heading>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {past.map((e) => (
+                <EventCard key={e.slug} event={e} />
+              ))}
+            </div>
+          </Container>
+        </section>
+      ) : null}
+    </>
+  );
+}

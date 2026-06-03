@@ -1,0 +1,37 @@
+{
+  "name": "cursor-india",
+  "version": "0.1.0",
+  "private": true,
+  "license": "MIT",
+  "description": "Cursor India: a community of builders shipping with Cursor across India.",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "clsx": "2.1.1",
+    "cmdk": "1.1.1",
+    "framer-motion": "12.34.2",
+    "geist": "1.5.1",
+    "lucide-react": "0.575.0",
+    "next": "16.2.6",
+    "nodemailer": "^8.0.10",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "tailwind-merge": "3.0.2"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "4.2.0",
+    "@types/node": "22.10.5",
+    "@types/nodemailer": "^8.0.0",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "postcss": "8.5.10",
+    "tailwindcss": "4.2.0",
+    "typescript": "5.9.3"
+  },
+  "packageManager": "pnpm@9.2.0"
+}
