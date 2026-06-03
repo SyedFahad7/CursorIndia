@@ -55,6 +55,10 @@ export async function generateMetadata(): Promise<Metadata> {
       index: true,
       follow: true,
     },
+    icons: {
+      icon: [{ url: "/favicon.ico", type: "image/x-icon" }],
+      shortcut: "/favicon.ico",
+    },
   };
 }
 
