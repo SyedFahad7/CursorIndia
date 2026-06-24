@@ -3,9 +3,8 @@
 // Design:
 //   - Strongly typed nested `Dict` object. Adding a key in `en` makes `hi`
 //     a compile error until matched. No string-key drift, no missing translations.
-//   - Hindi uses Devanagari with transliterated tech terms ("इवेंट्स", "कम्युनिटी",
-//     "वर्कशॉप"). This is how Indian developers actually talk in Hindi — formal
-//     Sanskrit-leaning translations feel stilted.
+//   - Hindi (`hi`) dictionary and city/ambassador i18n overrides are kept in the
+//     repo but paused — site is English-only until we support several languages.
 //   - Sentences with brand names (Cursor, Cursor India, Luma, Discord, X,
 //     LinkedIn, GitHub) keep brand names in English.
 

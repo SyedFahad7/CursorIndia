@@ -5,7 +5,7 @@ import { NextEvent } from "@/components/home/NextEvent";
 import { UpcomingEvents } from "@/components/home/UpcomingEvents";
 import { CitiesGrid } from "@/components/home/CitiesGrid";
 import { AmbassadorsStrip } from "@/components/home/AmbassadorsStrip";
-import { LetterFromAPAC } from "@/components/home/LetterFromAPAC";
+import { PhotoCarousel } from "@/components/home/PhotoCarousel";
 import { GlobalEventsCard } from "@/components/home/GlobalEventsCard";
 import { HomeFAQ } from "@/components/home/HomeFAQ";
 import { SectionBreak } from "@/components/ui/SectionBreak";
@@ -31,7 +31,7 @@ export default function HomePage() {
       <SectionBreak />
       <HomeFAQ />
       <SectionBreak />
-      <LetterFromAPAC />
+      <PhotoCarousel />
       <SectionBreak />
       <GlobalEventsCard />
     </>

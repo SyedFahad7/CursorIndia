@@ -1,14 +1,18 @@
 "use client";
 
+// Multi-locale toggle paused — English only until we support several languages.
+// Original implementation kept below for when we re-enable i18n.
+
+export function LocaleToggle() {
+  return null;
+}
+
+/*
+"use client";
+
 import { useLocale } from "@/lib/i18n/LocaleProvider";
 import { cn } from "@/lib/utils";
 
-/**
- * Text-only language toggle that mirrors the EN / TH style used by many
- * regional Cursor sites. Clicking it flips between English and Hindi, writes
- * the choice to a cookie, and triggers a server re-render so SSR-translated
- * content updates without a full page reload.
- */
 export function LocaleToggle() {
   const { locale, setLocale, dict } = useLocale();
   const next = locale === "en" ? "hi" : "en";
@@ -50,3 +54,4 @@ export function LocaleToggle() {
     </button>
   );
 }
+*/

@@ -11,7 +11,7 @@ import { ThemedLogo } from "@/components/ui/ThemedLogo";
 import { useDict } from "@/lib/i18n/LocaleProvider";
 import type { Dict } from "@/lib/i18n/dictionaries";
 import { ThemeToggle } from "./ThemeToggle";
-import { LocaleToggle } from "./LocaleToggle";
+// import { LocaleToggle } from "./LocaleToggle";
 import { cn } from "@/lib/utils";
 
 type NavKey = keyof Dict["nav"];
@@ -97,9 +97,11 @@ export function Navbar() {
                 {t.join}
               </Button>
             </div>
+            {/* Multi-locale toggle paused — English only for now.
             <div className="hidden md:block">
               <LocaleToggle />
             </div>
+            */}
             <button
               type="button"
               onClick={() => setOpen((v) => !v)}
@@ -143,9 +145,11 @@ export function Navbar() {
               >
                 {t.joinFull}
               </Link>
+              {/* Multi-locale toggle paused — English only for now.
               <div className="mt-4 px-3">
                 <LocaleToggle />
               </div>
+              */}
             </nav>
           </Container>
         </div>

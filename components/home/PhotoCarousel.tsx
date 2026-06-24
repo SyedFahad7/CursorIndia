@@ -14,16 +14,13 @@ function buildInfiniteTrack(slides: CarouselSlide[]): CarouselSlide[] {
   return [...base, ...base];
 }
 
-/** Infinite photo strip — embed below the APAC letter, not a standalone section. */
+/** Infinite photo strip on the homepage (below FAQ). */
 export async function PhotoCarousel() {
   const dict = await getDict();
   const slides = buildInfiniteTrack(getCarouselSlides());
 
   return (
-    <div
-      aria-label={dict.photoCarousel.sectionAria}
-      className="mt-6 md:mt-4"
-    >
+    <section aria-label={dict.photoCarousel.sectionAria} className="py-10 md:py-16">
       <div className="photo-carousel">
         <ul className="photo-carousel-track" aria-hidden="true">
           {slides.map((slide, i) => (
@@ -49,7 +46,7 @@ export async function PhotoCarousel() {
           ))}
         </ul>
       </div>
-    </div>
+    </section>
   );
 }
 

@@ -4,7 +4,9 @@ import { GeistMono } from "geist/font/mono";
 
 import { ThemeProvider } from "@/lib/theme";
 import { LocaleProvider } from "@/lib/i18n/LocaleProvider";
-import { getDict, getServerLocale } from "@/lib/i18n/server";
+import { getDict } from "@/lib/i18n/server";
+import { DEFAULT_LOCALE } from "@/lib/i18n/dictionaries";
+// import { getServerLocale } from "@/lib/i18n/server";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { CmdK } from "@/components/search/CmdK";
@@ -71,9 +73,7 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-// Theme-only boot script. Locale is now driven by a server-read cookie, so we
-// no longer need to mutate <html lang> from this inline script — the server
-// already set it correctly during SSR.
+// Theme-only boot script. Locale is English-only for now; multi-locale paused.
 const themeBootScript = `
 (function(){try{
   var t = localStorage.getItem('cursor-india-theme');
@@ -90,12 +90,15 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const locale = await getServerLocale();
+  // Multi-locale paused — always English. Re-enable getServerLocale() when
+  // we support several languages, not Hindi alone.
+  // const locale = await getServerLocale();
+  const locale = DEFAULT_LOCALE;
 
   return (
     <html
       lang={locale}
-      data-locale={locale}
+      // data-locale={locale}
       className={`${GeistSans.variable} ${GeistMono.variable}`}
       suppressHydrationWarning
     >

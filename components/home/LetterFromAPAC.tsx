@@ -1,3 +1,11 @@
+// APAC letter card — paused per product decision (English-only community site;
+// no personal sign-off block). Original implementation kept below for reference.
+
+export async function LetterFromAPAC() {
+  return null;
+}
+
+/*
 import Image from "next/image";
 
 import { Container } from "@/components/ui/Container";
@@ -8,10 +16,6 @@ import { PhotoCarousel } from "@/components/home/PhotoCarousel";
 import { signatureFont } from "@/lib/fonts/signature";
 import { getDict } from "@/lib/i18n/server";
 
-// The closing section of the home page. A short, hand-written welcome from the
-// APAC region lead. Swap <SignatureMark /> for a PNG at
-// /public/images/signatures/mohammed-sanjeed.png when you have a scan.
-
 export async function LetterFromAPAC() {
   const dict = await getDict();
   const t = dict.letter;
@@ -20,7 +24,6 @@ export async function LetterFromAPAC() {
     <section aria-labelledby="letter-heading" className="py-10 md:py-4">
       <Container width="narrow">
         <article className="relative rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 md:p-12 lg:p-16">
-          {/* CUBE: top-right inside the card. */}
           <ThemedLogo
             dark="/images/logos/CUBE_2D_DARK.png"
             light="/images/logos/CUBE_2D_LIGHT.png"
@@ -84,3 +87,4 @@ function SignatureMark() {
     </p>
   );
 }
+*/
