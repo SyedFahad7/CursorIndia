@@ -36,7 +36,7 @@ Two options. **You don't have to pick one.** They merge cleanly.
 
 #### Option A: just publish on Luma
 
-Most events should go this way. Once a city has its `lumaCalendarId` set in `content/cities/<city>.ts`, every event the ambassador publishes on that calendar shows up automatically on the site within 6 hours (cached server-side via `revalidate`).
+Most events should go this way. Once a city has its `lumaCalendarId` set in `content/cities/<city>.ts`, every event the ambassador publishes on that calendar shows up automatically on the site within about a minute (cached server-side via `LUMA_REVALIDATE_SECONDS` in `lib/revalidate.ts`).
 
 Hosts are inferred from the city's ambassador list. Archetype (Cafe / Workshop / Hackathon / Meetup) is inferred from the event title. No code change needed per event.
 
@@ -47,6 +47,12 @@ Getting the calendar ID:
 3. Copy the `cal-XXXXXXXX` part from the iCal URL.
 4. Paste it into `content/cities/<city>.ts` as `lumaCalendarId`.
 5. Done.
+
+### Event recaps (ambassadors — no code)
+
+After a past event, ambassadors manage everything at **`/admin/<city>`** — profile, Luma calendar, and event recaps. No Google Form, no redeploy.
+
+**Setup:** [`docs/supabase-setup.md`](docs/supabase-setup.md) — run SQL migrations `001` and `002`.
 
 #### Option B: a TS file (use for richer events)
 

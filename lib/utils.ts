@@ -83,6 +83,28 @@ export function relativeFromNow(iso: string): string {
   return future ? "soon" : "just now";
 }
 
+/** Long-form date for recap pages, e.g. "January 25, 2026". */
+export function formatLongDate(iso: string): string {
+  const date = new Date(iso);
+  const istMs = date.getTime() + 5.5 * 60 * 60 * 1000;
+  const ist = new Date(istMs);
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return `${months[ist.getUTCMonth()]} ${ist.getUTCDate()}, ${ist.getUTCFullYear()}`;
+}
+
 /** Maps an archetype to a short, human label. */
 export function archetypeLabel(a: "cafe" | "workshop" | "meetup" | "hackathon"): string {
   switch (a) {

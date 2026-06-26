@@ -2,8 +2,10 @@ import type { MetadataRoute } from "next";
 
 import { siteConfig } from "@/content/site.config";
 import { cities } from "@/content/cities";
+import { getAllRecaps } from "@/lib/recaps";
+import { LUMA_REVALIDATE_SECONDS } from "@/lib/revalidate";
 
-export const revalidate = 21600;
+export const revalidate = LUMA_REVALIDATE_SECONDS;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url.replace(/\/$/, "");
@@ -33,7 +35,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.6,
   }));
 
-  // Events have no per-slug detail page (they link out to Luma), and
-  // ambassadors all live on /ambassadors — both covered by `staticRoutes`.
-  return [...staticRoutes, ...cityRoutes];
+  const recapRoutes: MetadataRoute.Sitemap = (await getAllRecaps()).map((r) => ({
+    url: `${base}/recaps/${r.eventSlug}`,
+    lastModified: new Date(r.updatedAt),
+    changeFrequency: "monthly" as const,
+    priority: 0.5,
+  }));
+
+  // Events link out to Luma; recaps live at /recaps/[slug].
+  return [...staticRoutes, ...cityRoutes, ...recapRoutes];
 }

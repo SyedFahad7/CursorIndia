@@ -10,6 +10,7 @@ import { getCityName } from "@/content/cities";
 import { getEventGallery } from "@/lib/photos";
 import { getDict } from "@/lib/i18n/server";
 import { formatIST } from "@/lib/utils";
+import { LUMA_REVALIDATE_SECONDS } from "@/lib/revalidate";
 
 export async function generateMetadata(): Promise<Metadata> {
   const dict = await getDict();
@@ -19,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const revalidate = 21600;
+export const revalidate = LUMA_REVALIDATE_SECONDS;
 
 export default async function GalleryPage() {
   const [all, dict] = await Promise.all([getAllEvents(), getDict()]);

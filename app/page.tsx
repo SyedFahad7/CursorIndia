@@ -9,8 +9,9 @@ import { PhotoCarousel } from "@/components/home/PhotoCarousel";
 import { GlobalEventsCard } from "@/components/home/GlobalEventsCard";
 import { HomeFAQ } from "@/components/home/HomeFAQ";
 import { SectionBreak } from "@/components/ui/SectionBreak";
+import { LUMA_REVALIDATE_SECONDS } from "@/lib/revalidate";
 
-export const revalidate = 21600;
+export const revalidate = LUMA_REVALIDATE_SECONDS;
 
 export default function HomePage() {
   return (

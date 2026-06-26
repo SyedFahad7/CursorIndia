@@ -1,36 +1,40 @@
 import Image from "next/image";
-import { existsSync } from "node:fs";
-import { join } from "node:path";
 
 import { cn } from "@/lib/utils";
 
 /**
- * Bento photo grid for the hero. Mobile: 2-column stack; desktop: 4×3 grid
- * with deterministic placement.
- *
- * Drop images into /public/images/hero/01.jpg … 06.jpg.
- * If a file is missing, that tile renders as a stylish placeholder so the
- * grid still composes correctly before photos are added.
+ * Bento photo grid for the hero. Expects hero1–hero6 in /public/images/hero/
+ * (jpg/png/webp). Mobile: 2-column stack; desktop: 4×3 grid with placement
+ * for up to six tiles; extra images get simple single cells.
  */
 
-const tiles = [
-  { i: "01", cls: "md:col-span-2 md:row-span-2", aspect: "aspect-square md:aspect-auto" },
-  { i: "02", cls: "md:col-span-2 md:row-span-1", aspect: "aspect-[4/3] md:aspect-auto" },
-  { i: "03", cls: "md:col-span-1 md:row-span-1", aspect: "aspect-square" },
-  { i: "04", cls: "md:col-span-1 md:row-span-2", aspect: "aspect-square md:aspect-auto" },
-  { i: "05", cls: "md:col-span-2 md:row-span-1", aspect: "aspect-[4/3] md:aspect-auto" },
-  { i: "06", cls: "hidden md:block md:col-span-1 md:row-span-1", aspect: "md:aspect-square" },
+const tileLayouts = [
+  { cls: "md:col-span-2 md:row-span-2", aspect: "aspect-square md:aspect-auto" },
+  { cls: "md:col-span-2 md:row-span-1", aspect: "aspect-[4/3] md:aspect-auto" },
+  { cls: "md:col-span-1 md:row-span-1", aspect: "aspect-square" },
+  { cls: "md:col-span-1 md:row-span-2", aspect: "aspect-square md:aspect-auto" },
+  { cls: "md:col-span-2 md:row-span-1", aspect: "aspect-[4/3] md:aspect-auto" },
+  { cls: "hidden md:block md:col-span-1 md:row-span-1", aspect: "md:aspect-square" },
 ] as const;
 
-function resolveSrc(i: string): string | null {
-  for (const ext of ["jpg", "jpeg", "png", "webp", "avif"]) {
-    const abs = join(process.cwd(), "public", "images", "hero", `${i}.${ext}`);
-    if (existsSync(abs)) return `/images/hero/${i}.${ext}`;
-  }
-  return null;
+const fallbackLayout = {
+  cls: "md:col-span-1 md:row-span-1",
+  aspect: "aspect-square",
+} as const;
+
+interface HeroPhoto {
+  src: string;
+  alt: string;
 }
 
-export function BentoGrid({ className }: { className?: string }) {
+interface BentoGridProps {
+  photos: HeroPhoto[];
+  className?: string;
+}
+
+export function BentoGrid({ photos, className }: BentoGridProps) {
+  const slotCount = photos.length > 0 ? photos.length : tileLayouts.length;
+
   return (
     <div
       className={cn(
@@ -38,28 +42,33 @@ export function BentoGrid({ className }: { className?: string }) {
         className,
       )}
     >
-      {tiles.map((t) => {
-        const src = resolveSrc(t.i);
+      {Array.from({ length: slotCount }, (_, idx) => {
+        const base = tileLayouts[idx] ?? fallbackLayout;
+        const photo = photos[idx];
+        const layout =
+          idx === 5 && photo
+            ? { cls: "md:col-span-1 md:row-span-1", aspect: "aspect-square" as const }
+            : base;
         return (
           <div
-            key={t.i}
+            key={photo?.src ?? `placeholder-${idx}`}
             className={cn(
               "relative overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-elevated)]",
-              t.cls,
-              t.aspect,
+              layout.cls,
+              layout.aspect,
             )}
           >
-            {src ? (
+            {photo ? (
               <Image
-                src={src}
-                alt={`Cursor India event photo ${t.i}`}
+                src={photo.src}
+                alt={photo.alt}
                 fill
                 sizes="(min-width: 768px) 25vw, 50vw"
                 className="object-cover"
-                priority={t.i === "01"}
+                priority={idx === 0}
               />
             ) : (
-              <Placeholder index={t.i} />
+              <Placeholder slot={idx + 1} />
             )}
           </div>
         );
@@ -68,14 +77,14 @@ export function BentoGrid({ className }: { className?: string }) {
   );
 }
 
-function Placeholder({ index }: { index: string }) {
+function Placeholder({ slot }: { slot: number }) {
   return (
     <div
       aria-hidden
       className="absolute inset-0 grid place-items-center bg-[radial-gradient(at_30%_20%,var(--color-accent-soft)_0%,transparent_50%),radial-gradient(at_80%_80%,rgba(255,255,255,0.05)_0%,transparent_60%)]"
     >
       <span className="font-mono text-xs text-[var(--color-subtle)]">
-        /images/hero/{index}.jpg
+        /images/hero/hero{slot}.jpg
       </span>
     </div>
   );

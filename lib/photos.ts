@@ -4,7 +4,7 @@
 
 import "server-only";
 
-import { existsSync, readdirSync, statSync } from "node:fs";
+import { readdirSync, statSync } from "node:fs";
 import { join } from "node:path";
 
 import type { CursorIndiaEvent, EventPhoto } from "@/lib/types";
@@ -87,42 +87,88 @@ export function getAllEventPhotos(): EventPhoto[] {
   return out.sort((a, b) => a.src.localeCompare(b.src));
 }
 
-const CAROUSEL_SLOTS = ["01", "02", "03", "04", "05", "06"] as const;
+const CAROUSEL_SLOTS = [
+  "carousel1",
+  "carousel2",
+  "carousel3",
+  "carousel4",
+  "carousel5",
+  "carousel6",
+] as const;
 
-function resolveCarouselImage(index: string): string | null {
-  for (const ext of ["jpg", "jpeg", "png", "webp", "avif"]) {
-    const abs = join(
-      process.cwd(),
-      "public",
-      "images",
-      "carousel",
-      `${index}.${ext}`,
-    );
-    if (existsSync(abs)) return `/images/carousel/${index}.${ext}`;
+function carouselAssetPath(filename: string): string {
+  return `/images/carousel/${encodeURIComponent(filename)}`;
+}
+
+function resolveCarouselImage(basename: string): string | null {
+  const dirAbs = join(process.cwd(), "public", "images", "carousel");
+  let files: string[];
+  try {
+    files = readdirSync(dirAbs);
+  } catch {
+    return null;
   }
-  return null;
+  const match = files.find(
+    (f) =>
+      IMG_EXT.test(f) &&
+      f.replace(/\.[^.]+$/, "").toLowerCase() === basename.toLowerCase(),
+  );
+  return match ? carouselAssetPath(match) : null;
+}
+
+function carouselFilenameSort(a: string, b: string): number {
+  const num = (f: string) => {
+    const m = /^carousel(\d+)$/i.exec(f.replace(/\.[^.]+$/, ""));
+    return m ? Number(m[1]) : Number.NaN;
+  };
+  const na = num(a);
+  const nb = num(b);
+  if (!Number.isNaN(na) && !Number.isNaN(nb)) return na - nb;
+  return a.localeCompare(b, undefined, { sensitivity: "base" });
 }
 
 export interface CarouselSlide {
   key: string;
   src: string | null;
   alt: string;
-  /** Shown when src is missing — e.g. /images/carousel/01.jpg */
+  /** Shown when src is missing — e.g. /images/carousel/carousel1.jpg */
   placeholderLabel: string;
 }
 
-/** Always six slots (01–06). Missing files keep placeholder labels visible. */
+/** carousel1–carousel6 in /public/images/carousel/. Missing files show placeholders. */
 export function getCarouselFolderSlides(): CarouselSlide[] {
-  return CAROUSEL_SLOTS.map((i) => ({
-    key: i,
-    src: resolveCarouselImage(i),
-    alt: `Cursor India event photo ${i}`,
-    placeholderLabel: `/images/carousel/${i}.jpg`,
+  const fromSlots = CAROUSEL_SLOTS.map((slot, i) => ({
+    key: slot,
+    src: resolveCarouselImage(slot),
+    alt: `Cursor India event photo ${i + 1}`,
+    placeholderLabel: `/images/carousel/${slot}.jpg`,
   }));
+  if (fromSlots.some((s) => s.src)) return fromSlots;
+
+  const dirAbs = join(process.cwd(), "public", "images", "carousel");
+  let files: string[];
+  try {
+    files = readdirSync(dirAbs);
+  } catch {
+    return fromSlots;
+  }
+  const discovered = files
+    .filter((f) => IMG_EXT.test(f))
+    .sort(carouselFilenameSort)
+    .map((f, i) => ({
+      key: f,
+      src: carouselAssetPath(f),
+      alt: `Cursor India event photo ${i + 1}`,
+      placeholderLabel: `/images/carousel/${f}`,
+    }));
+  return discovered.length > 0 ? discovered : fromSlots;
 }
 
-/** Home carousel — event gallery first, else numbered carousel folder. */
+/** Home carousel — carousel folder first, else event gallery photos. */
 export function getCarouselSlides(): CarouselSlide[] {
+  const folder = getCarouselFolderSlides();
+  if (folder.some((s) => s.src)) return folder;
+
   const events = getAllEventPhotos();
   if (events.length > 0) {
     return events.map((photo, i) => ({
@@ -132,11 +178,69 @@ export function getCarouselSlides(): CarouselSlide[] {
       placeholderLabel: photo.src,
     }));
   }
-  return getCarouselFolderSlides();
+  return folder;
 }
 
 /** @deprecated Use getCarouselSlides */
 export { getCarouselSlides as getCarouselPhotos };
+
+/** Public URL for a file directly under /public/images/hero/. */
+function heroAssetPath(filename: string): string {
+  return `/images/hero/${encodeURIComponent(filename)}`;
+}
+
+const HERO_BENTO_SLOTS = ["hero1", "hero2", "hero3", "hero4", "hero5", "hero6"] as const;
+
+function resolveHeroBentoImage(basename: string): string | null {
+  const dirAbs = join(process.cwd(), "public", "images", "hero");
+  let files: string[];
+  try {
+    files = readdirSync(dirAbs);
+  } catch {
+    return null;
+  }
+  const match = files.find(
+    (f) =>
+      IMG_EXT.test(f) &&
+      f.replace(/\.[^.]+$/, "").toLowerCase() === basename.toLowerCase(),
+  );
+  return match ? heroAssetPath(match) : null;
+}
+
+function heroFilenameSort(a: string, b: string): number {
+  const num = (f: string) => {
+    const m = /^hero(\d+)$/i.exec(f.replace(/\.[^.]+$/, ""));
+    return m ? Number(m[1]) : Number.NaN;
+  };
+  const na = num(a);
+  const nb = num(b);
+  if (!Number.isNaN(na) && !Number.isNaN(nb)) return na - nb;
+  return a.localeCompare(b, undefined, { sensitivity: "base" });
+}
+
+/** hero1–hero6 in /public/images/hero/ for the homepage bento. */
+export function getHeroBentoImages(): { src: string; alt: string }[] {
+  const fromSlots = HERO_BENTO_SLOTS.flatMap((slot, i) => {
+    const src = resolveHeroBentoImage(slot);
+    return src ? [{ src, alt: `Cursor India event photo ${i + 1}` }] : [];
+  });
+  if (fromSlots.length > 0) return fromSlots;
+
+  const dirAbs = join(process.cwd(), "public", "images", "hero");
+  let files: string[];
+  try {
+    files = readdirSync(dirAbs);
+  } catch {
+    return [];
+  }
+  return files
+    .filter((f) => IMG_EXT.test(f))
+    .sort(heroFilenameSort)
+    .map((f, i) => ({
+      src: heroAssetPath(f),
+      alt: `Cursor India event photo ${i + 1}`,
+    }));
+}
 
 /** Returns the hero image path for an event, falling back to /public/images/events/<slug>/hero.*. */
 export function getEventHero(event: CursorIndiaEvent): string | undefined {

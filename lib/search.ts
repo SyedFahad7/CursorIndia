@@ -4,7 +4,8 @@
 
 import { getAllEvents } from "@/lib/events";
 import { cities, getCityName } from "@/content/cities";
-import { ambassadors, getAmbassadorName } from "@/content/ambassadors";
+import { getAllAmbassadorsMerged } from "@/lib/admin-settings";
+import { getAmbassadorName } from "@/content/ambassadors";
 import { archetypeLabel, formatIST } from "@/lib/utils";
 import { localizedName } from "@/lib/i18n/names";
 import type { Dict, Locale } from "@/lib/i18n/dictionaries";
@@ -68,7 +69,8 @@ export async function buildSearchIndex(
   // shared /ambassadors index, with a deep-link hash so users land near the
   // right card (CSS :target won't render anything special, but the URL is
   // still useful for sharing).
-  for (const a of ambassadors) {
+  const ambassadorList = await getAllAmbassadorsMerged();
+  for (const a of ambassadorList) {
     const display = getAmbassadorName(a, locale);
     items.push({
       kind: "ambassador",

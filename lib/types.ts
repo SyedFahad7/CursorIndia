@@ -113,6 +113,16 @@ export interface CursorIndiaEvent {
   };
 }
 
+/** Published event recap stored in Supabase (managed via /admin). */
+export interface EventRecap {
+  eventSlug: string;
+  city: CitySlug;
+  summary: string;
+  photoCredit?: string;
+  photos: EventPhoto[];
+  updatedAt: string;
+}
+
 export interface SiteConfig {
   name: string;
   shortName: string;

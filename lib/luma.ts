@@ -5,14 +5,16 @@
 //   https://api.lu.ma/ics/get?entity=calendar&id=<cal-XXXX>
 //
 // We don't expose this URL anywhere on the site, we just call it server-side
-// during render. Result is cached via Next's fetch revalidation (6h).
+// during render. Result is cached via Next's fetch revalidation (~1 min).
 
 import type { City, CursorIndiaEvent, EventArchetype } from "@/lib/types";
 import { ambassadors } from "@/content/ambassadors";
 import { parseIcs, type IcsEvent } from "@/lib/ics";
+import { devRelaxedFetch } from "@/lib/dev-fetch";
+import { getLumaCalendarId } from "@/lib/admin-settings";
+import { LUMA_REVALIDATE_SECONDS } from "@/lib/revalidate";
 
 const LUMA_ICS_BASE = "https://api.lu.ma/ics/get?entity=calendar&id=";
-const REVALIDATE_SECONDS = 60 * 60 * 6;
 
 /**
  * Derive an event archetype from the title alone (Luma doesn't have a
@@ -107,13 +109,15 @@ function toCursorEvent(ics: IcsEvent, city: City): CursorIndiaEvent | null {
  * we return [] and log a single warning so the rest of the build keeps going.
  */
 export async function fetchCityLumaEvents(city: City): Promise<CursorIndiaEvent[]> {
-  if (!city.lumaCalendarId) return [];
+  const calendarId = await getLumaCalendarId(city.slug);
+  if (!calendarId) return [];
 
-  const url = `${LUMA_ICS_BASE}${encodeURIComponent(city.lumaCalendarId)}`;
+  const url = `${LUMA_ICS_BASE}${encodeURIComponent(calendarId)}`;
 
   try {
-    const res = await fetch(url, {
-      next: { revalidate: REVALIDATE_SECONDS },
+    const http = devRelaxedFetch() ?? fetch;
+    const res = await http(url, {
+      next: { revalidate: LUMA_REVALIDATE_SECONDS },
       headers: { Accept: "text/calendar" },
     });
     if (!res.ok) {

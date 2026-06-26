@@ -9,9 +9,9 @@ export async function StatStrip() {
   const t = dict.stats;
 
   const stats = [
-    { value: "9", label: t.cities },
+    { value: "10+", label: t.cities },
     { value: "3000+", label: t.members },
-    { value: "12+", label: t.events },
+    { value: "15+", label: t.events },
   ];
 
   return (

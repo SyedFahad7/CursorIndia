@@ -44,8 +44,8 @@ function withDerivedStatus(e: CursorIndiaEvent): CursorIndiaEvent {
 
 /**
  * The merged set, memoized per React render via `cache()`. Network fetches
- * are additionally cached for 6h by Next's fetch revalidation, so this only
- * actually hits Luma about every 6 hours per server process.
+ * are additionally cached for ~1 min by Next's fetch revalidation, so this
+ * only actually hits Luma about every minute per server process.
  */
 export const getAllEvents = cache(async (): Promise<CursorIndiaEvent[]> => {
   const luma = await fetchAllLumaEvents(cities);

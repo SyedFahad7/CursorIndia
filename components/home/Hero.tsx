@@ -5,10 +5,12 @@ import { Eyebrow, Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
 import { Button } from "@/components/ui/Button";
 import { getDict } from "@/lib/i18n/server";
+import { getHeroBentoImages } from "@/lib/photos";
 import { BentoGrid } from "./BentoGrid";
 
 export async function Hero() {
   const dict = await getDict();
+  const heroPhotos = getHeroBentoImages();
   const t = dict.hero;
 
   return (
@@ -42,7 +44,7 @@ export async function Hero() {
             </div>
           </div>
           <div className="lg:col-span-6 xl:col-span-7 2xl:col-span-7">
-            <BentoGrid className="2xl:auto-rows-[10rem]" />
+            <BentoGrid photos={heroPhotos} className="2xl:auto-rows-[10rem]" />
           </div>
         </div>
       </Container>

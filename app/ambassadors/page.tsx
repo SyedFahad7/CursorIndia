@@ -6,7 +6,7 @@ import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
 import { Card } from "@/components/ui/Card";
 import { AmbassadorCard } from "@/components/ambassadors/AmbassadorCard";
-import { ambassadors } from "@/content/ambassadors";
+import { getAllAmbassadorsMerged } from "@/lib/admin-settings";
 import { getDict } from "@/lib/i18n/server";
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -20,7 +20,9 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function AmbassadorsIndexPage() {
   const dict = await getDict();
   const t = dict.pages.ambassadors;
-  const sorted = [...ambassadors].sort((a, b) => a.name.localeCompare(b.name));
+  const sorted = [...(await getAllAmbassadorsMerged())].sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
 
   return (
     <>

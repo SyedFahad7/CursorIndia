@@ -3,7 +3,8 @@ import { CircleArrowRight as ArrowCircleRight } from "lucide-react";
 
 import { Card } from "@/components/ui/Card";
 import { Heading } from "@/components/ui/Heading";
-import { getAmbassadorsByCity, getAmbassadorName } from "@/content/ambassadors";
+import { getAmbassadorName } from "@/content/ambassadors";
+import { getAmbassadorsForCity } from "@/lib/admin-settings";
 import { getServerLocale } from "@/lib/i18n/server";
 import { localizedName } from "@/lib/i18n/names";
 import type { City } from "@/lib/types";
@@ -14,7 +15,7 @@ interface CityCardProps {
 
 export async function CityCard({ city }: CityCardProps) {
   const locale = await getServerLocale();
-  const ambassador = getAmbassadorsByCity(city.slug)[0];
+  const ambassador = (await getAmbassadorsForCity(city.slug))[0];
 
   return (
     <Card className="h-full">

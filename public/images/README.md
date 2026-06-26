@@ -6,7 +6,7 @@ Drop images into the matching subfolder. The site auto-resolves them.
 
 ```
 public/images/
-├── hero/            01.jpg … 06.jpg — Bento grid on the homepage hero
+├── hero/            Any .jpg/.png — all files fill the homepage bento grid
 ├── carousel/        01.jpg … 06.jpg — Infinite strip below the APAC letter
 ├── events/
 │   └── <slug>/      hero.jpg + any other photos for the event gallery

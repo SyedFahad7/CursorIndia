@@ -8,14 +8,17 @@ import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
 import { Card } from "@/components/ui/Card";
 import { EventCard } from "@/components/events/EventCard";
+import { PastEventRecapCard } from "@/components/recaps/PastEventRecapCard";
 import { AmbassadorCard } from "@/components/ambassadors/AmbassadorCard";
 import { cities, getCityBySlug } from "@/content/cities";
-import { getAmbassadorsByCity } from "@/content/ambassadors";
+import { getCityForDisplay, getAmbassadorsForCity } from "@/lib/admin-settings";
 import { getEventsByCity } from "@/lib/events";
+import { getRecapMap } from "@/lib/recaps";
 import { getDict, getServerLocale } from "@/lib/i18n/server";
 import { localizedName } from "@/lib/i18n/names";
+import { LUMA_REVALIDATE_SECONDS } from "@/lib/revalidate";
 
-export const revalidate = 21600;
+export const revalidate = LUMA_REVALIDATE_SECONDS;
 
 export function generateStaticParams() {
   return cities.map((c) => ({ slug: c.slug }));
@@ -39,19 +42,21 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function CityDetailPage({ params }: PageProps) {
   const { slug } = await params;
-  const city = getCityBySlug(slug);
+  const city = await getCityForDisplay(slug);
   if (!city) notFound();
 
   const [dict, locale] = await Promise.all([getDict(), getServerLocale()]);
   const t = dict.pages.cityDetail;
   const cityName = localizedName(city, locale);
 
-  const cityAmbassadors = getAmbassadorsByCity(city.slug);
-  const cityEvents = (await getEventsByCity(city.slug)).sort((a, b) =>
-    a.date.localeCompare(b.date),
-  );
-  const upcoming = cityEvents.filter((e) => e.status === "upcoming");
-  const past = cityEvents.filter((e) => e.status === "past");
+  const [cityAmbassadors, cityEvents, recapMap] = await Promise.all([
+    getAmbassadorsForCity(city.slug),
+    getEventsByCity(city.slug),
+    getRecapMap(),
+  ]);
+  const sortedEvents = cityEvents.sort((a, b) => a.date.localeCompare(b.date));
+  const upcoming = sortedEvents.filter((e) => e.status === "upcoming");
+  const past = sortedEvents.filter((e) => e.status === "past");
 
   return (
     <>
@@ -124,9 +129,20 @@ export default async function CityDetailPage({ params }: PageProps) {
               {t.pastHeading(cityName)}
             </Heading>
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {past.map((e) => (
-                <EventCard key={e.slug} event={e} />
-              ))}
+              {past.map((e) => {
+                const recap = recapMap.get(e.slug);
+                if (recap && (recap.photos.length > 0 || recap.summary)) {
+                  return (
+                    <PastEventRecapCard
+                      key={e.slug}
+                      event={e}
+                      recap={recap}
+                      viewRecapLabel={dict.pages.eventDetail.recap}
+                    />
+                  );
+                }
+                return <EventCard key={e.slug} event={e} />;
+              })}
             </div>
           </Container>
         </section>

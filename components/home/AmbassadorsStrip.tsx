@@ -1,14 +1,14 @@
 import { Container } from "@/components/ui/Container";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { AmbassadorCard } from "@/components/ambassadors/AmbassadorCard";
-import { ambassadors } from "@/content/ambassadors";
+import { getAllAmbassadorsMerged } from "@/lib/admin-settings";
 import { getDict } from "@/lib/i18n/server";
 
 export async function AmbassadorsStrip() {
   const dict = await getDict();
   const t = dict.ambassadorsStrip;
 
-  const featured = [...ambassadors]
+  const featured = [...(await getAllAmbassadorsMerged())]
     .sort((a, b) => a.name.localeCompare(b.name))
     .slice(0, 8);
 
