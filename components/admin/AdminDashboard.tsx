@@ -68,8 +68,7 @@ export function AdminDashboard({
             {cityName} admin
           </Heading>
           <Text variant="muted" className="mt-1 text-sm max-w-2xl">
-            Update your profile, connect Luma, and publish event recaps — all from here. Changes
-            go live without redeploying the site.
+            Update your profile, connect Luma, and publish event recaps.
           </Text>
         </div>
         <Button variant="secondary" size="sm" onClick={() => void logout()}>

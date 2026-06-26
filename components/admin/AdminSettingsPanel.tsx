@@ -237,7 +237,7 @@ export function AdminSettingsPanel({ city, initial, onSaved }: AdminSettingsPane
           </Heading>
           <Text variant="muted" className="mt-1 text-sm">
             Once saved, your events (upcoming + past) sync automatically — about 1 minute after
-            you publish on Luma. No redeploy needed.
+            you publish on Luma.
           </Text>
         </div>
 
@@ -299,7 +299,7 @@ export function AdminSettingsPanel({ city, initial, onSaved }: AdminSettingsPane
               Your profile
             </Heading>
             <Text variant="muted" className="mt-1 text-sm">
-              Shown on /ambassadors and your city page. Updates go live immediately.
+              Shown on /ambassadors and your city page.
             </Text>
           </div>
 
