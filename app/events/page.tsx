@@ -9,7 +9,6 @@ import { Card } from "@/components/ui/Card";
 import { getPastEvents, getUpcomingEvents } from "@/lib/events";
 import { getRecapMap } from "@/lib/recaps";
 import { getDict } from "@/lib/i18n/server";
-import { LUMA_REVALIDATE_SECONDS } from "@/lib/revalidate";
 
 export async function generateMetadata(): Promise<Metadata> {
   const dict = await getDict();
@@ -19,7 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export const revalidate = LUMA_REVALIDATE_SECONDS;
+/** Keep in sync with LUMA_REVALIDATE_SECONDS in lib/revalidate.ts */
+export const revalidate = 60;
 
 export default async function EventsIndexPage() {
   const [upcoming, past, dict, recapMap] = await Promise.all([

@@ -3,9 +3,9 @@ import type { MetadataRoute } from "next";
 import { siteConfig } from "@/content/site.config";
 import { cities } from "@/content/cities";
 import { getAllRecaps } from "@/lib/recaps";
-import { LUMA_REVALIDATE_SECONDS } from "@/lib/revalidate";
 
-export const revalidate = LUMA_REVALIDATE_SECONDS;
+/** Keep in sync with LUMA_REVALIDATE_SECONDS in lib/revalidate.ts */
+export const revalidate = 60;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = siteConfig.url.replace(/\/$/, "");

@@ -9,11 +9,11 @@ import { Text } from "@/components/ui/Text";
 import { getCityName } from "@/content/cities";
 import { getEventBySlug } from "@/lib/events";
 import { getRecapBySlug } from "@/lib/recaps";
-import { LUMA_REVALIDATE_SECONDS } from "@/lib/revalidate";
 import { getServerLocale } from "@/lib/i18n/server";
 import { formatLongDate } from "@/lib/utils";
 
-export const revalidate = LUMA_REVALIDATE_SECONDS;
+/** Keep in sync with LUMA_REVALIDATE_SECONDS in lib/revalidate.ts */
+export const revalidate = 60;
 
 interface PageProps {
   params: Promise<{ slug: string }>;

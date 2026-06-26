@@ -16,9 +16,9 @@ import { getEventsByCity } from "@/lib/events";
 import { getRecapMap } from "@/lib/recaps";
 import { getDict, getServerLocale } from "@/lib/i18n/server";
 import { localizedName } from "@/lib/i18n/names";
-import { LUMA_REVALIDATE_SECONDS } from "@/lib/revalidate";
 
-export const revalidate = LUMA_REVALIDATE_SECONDS;
+/** Keep in sync with LUMA_REVALIDATE_SECONDS in lib/revalidate.ts */
+export const revalidate = 60;
 
 export function generateStaticParams() {
   return cities.map((c) => ({ slug: c.slug }));
