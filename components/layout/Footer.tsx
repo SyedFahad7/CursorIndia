@@ -14,7 +14,7 @@ export async function Footer() {
     { label: t.nav.events, href: "/events" },
     { label: t.nav.cities, href: "/cities" },
     { label: t.nav.ambassadors, href: "/ambassadors" },
-    { label: t.nav.gallery, href: "/gallery" },
+    // { label: t.nav.gallery, href: "/gallery" },
   ];
 
   const generalLinks: {

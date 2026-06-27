@@ -1,3 +1,11 @@
+import { notFound } from "next/navigation";
+
+// Gallery page paused — re-enable when ready.
+export default function GalleryPage() {
+  notFound();
+}
+
+/*
 import type { Metadata } from "next";
 
 import { Container } from "@/components/ui/Container";
@@ -19,7 +27,6 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-/** Keep in sync with LUMA_REVALIDATE_SECONDS in lib/revalidate.ts */
 export const revalidate = 60;
 
 export default async function GalleryPage() {
@@ -89,3 +96,4 @@ export default async function GalleryPage() {
     </>
   );
 }
+*/

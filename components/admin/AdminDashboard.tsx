@@ -12,6 +12,7 @@ import {
   AdminSettingsPanel,
   type AdminSettingsState,
 } from "@/components/admin/AdminSettingsPanel";
+import { adminSectionBar } from "@/components/admin/adminStyles";
 import { formatIST } from "@/lib/utils";
 import type { CursorIndiaEvent, EventRecap } from "@/lib/types";
 
@@ -65,7 +66,7 @@ export function AdminDashboard({
       <div className="flex flex-wrap items-start justify-between gap-4">
         <div>
           <Heading level={1} size="lg">
-            {cityName} admin
+            <span className="text-[var(--color-coral)]">{cityName}</span> admin
           </Heading>
           <Text variant="muted" className="mt-1 text-sm max-w-2xl">
             Update your profile, connect Luma, and publish event recaps.
@@ -94,9 +95,12 @@ export function AdminDashboard({
       ) : null}
 
       <section className="flex flex-col gap-4">
-        <Heading level={2} size="md">
-          Past events — add recaps
-        </Heading>
+        <div className="flex items-center gap-2.5">
+          <span className={adminSectionBar} aria-hidden />
+          <Heading level={2} size="md">
+            Past events — add recaps
+          </Heading>
+        </div>
         {past.length === 0 ? (
           <Card className="p-6 text-center">
             <Text variant="muted">
@@ -136,9 +140,12 @@ export function AdminDashboard({
       </section>
 
       <section className="flex flex-col gap-4">
-        <Heading level={2} size="md">
-          Upcoming (from Luma)
-        </Heading>
+        <div className="flex items-center gap-2.5">
+          <span className={adminSectionBar} aria-hidden />
+          <Heading level={2} size="md">
+            Upcoming (from Luma)
+          </Heading>
+        </div>
         {upcoming.length === 0 ? (
           <Text variant="muted" className="text-sm">
             Nothing upcoming — publish on Luma or connect your Calendar ID above.

@@ -55,6 +55,10 @@ export async function IntroCard() {
                 )}
               >
                 <h4 className="text-base font-semibold text-[var(--color-text)]">
+                  <span
+                    aria-hidden
+                    className="mb-2 block h-0.5 w-5 rounded-full bg-[var(--color-coral)]/55"
+                  />
                   {a.title}
                 </h4>
                 <p className="mt-2 text-sm leading-relaxed text-[var(--color-muted)]">

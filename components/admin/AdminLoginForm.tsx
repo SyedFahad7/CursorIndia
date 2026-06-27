@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
+import { adminInputClass } from "@/components/admin/adminStyles";
 
 interface AdminLoginFormProps {
   city: string;
@@ -41,10 +42,14 @@ export function AdminLoginForm({ city, cityName }: AdminLoginFormProps) {
   }
 
   return (
-    <Card className="mx-auto w-full max-w-md p-6 md:p-8">
+    <Card className="relative mx-auto w-full max-w-md overflow-hidden p-6 md:p-8">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-coral)]/45 to-transparent"
+      />
       <div className="flex flex-col gap-2">
         <Heading level={1} size="md">
-          {cityName} admin
+          <span className="text-[var(--color-coral)]">{cityName}</span> admin
         </Heading>
         <Text variant="muted" className="text-sm">
           Enter your city password to add or edit event recaps.
@@ -60,7 +65,7 @@ export function AdminLoginForm({ city, cityName }: AdminLoginFormProps) {
             onChange={(e) => setPassword(e.target.value)}
             autoComplete="current-password"
             required
-            className="h-10 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg)] px-3 text-[var(--color-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+            className={adminInputClass}
           />
         </label>
 

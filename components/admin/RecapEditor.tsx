@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
+import { adminInputClass, adminSectionBar } from "@/components/admin/adminStyles";
 import { formatIST } from "@/lib/utils";
 import type { CursorIndiaEvent, EventPhoto } from "@/lib/types";
 import type { EventRecap } from "@/lib/types";
@@ -86,11 +87,18 @@ export function RecapEditor({ city, event, existing, onSaved, onCancel }: RecapE
   }
 
   return (
-    <Card className="flex flex-col gap-5 p-5 md:p-6">
+    <Card className="relative flex flex-col gap-5 overflow-hidden p-5 md:p-6">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[var(--color-coral)]/40 to-transparent"
+      />
       <div>
-        <Heading level={3} size="sm">
-          {existing ? "Edit recap" : "Add recap"} — {event.title}
-        </Heading>
+        <div className="flex items-center gap-2.5">
+          <span className={adminSectionBar} aria-hidden />
+          <Heading level={3} size="sm">
+            {existing ? "Edit recap" : "Add recap"} — {event.title}
+          </Heading>
+        </div>
         <Text variant="muted" className="mt-1 text-sm">
           {formatIST(event.date)}
         </Text>
@@ -103,7 +111,7 @@ export function RecapEditor({ city, event, existing, onSaved, onCancel }: RecapE
           onChange={(e) => setSummary(e.target.value)}
           rows={4}
           placeholder="What happened at the event? Demos, people, vibe…"
-          className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-[var(--color-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          className="rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg)] px-3 py-2 text-[var(--color-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-coral)]/35"
         />
       </label>
 
@@ -114,7 +122,7 @@ export function RecapEditor({ city, event, existing, onSaved, onCancel }: RecapE
           value={photoCredit}
           onChange={(e) => setPhotoCredit(e.target.value)}
           placeholder="e.g. Arundhati Shenoy"
-          className="h-10 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg)] px-3 outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]"
+          className="h-10 rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg)] px-3 outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-coral)]/35"
         />
       </label>
 

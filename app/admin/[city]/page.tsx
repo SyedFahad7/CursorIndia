@@ -36,8 +36,12 @@ export default async function AdminCityPage({ params }: PageProps) {
   const isAuthed = sessionCity === citySlug;
 
   return (
-    <section className="py-12 md:py-16">
-      <Container width="wide">
+    <section className="relative overflow-hidden py-12 md:py-16">
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 h-40 bg-[radial-gradient(45%_80%_at_50%_0%,var(--color-coral-glow)_0%,transparent_72%)]"
+      />
+      <Container width="wide" className="relative">
         {!configured ? (
           <Card className="mx-auto max-w-lg p-6 md:p-8">
             <Text variant="muted" className="text-sm leading-relaxed">

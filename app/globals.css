@@ -30,6 +30,9 @@
   --color-accent-hover: #e5e5e5;
   /* Coral links — section CTAs, locale toggle, global Luma link */
   --color-coral: #f47f47;
+  --color-coral-soft: rgba(244, 127, 71, 0.1);
+  --color-coral-glow: rgba(244, 127, 71, 0.16);
+  --color-coral-border: rgba(244, 127, 71, 0.28);
 
   --color-success: #22c55e;
   --color-warning: #eab308;
@@ -63,6 +66,10 @@
   --color-accent: #181714;
   --color-accent-soft: rgba(0, 0, 0, 0.06);
   --color-accent-hover: #1e1d18;
+
+  --color-coral-soft: rgba(244, 127, 71, 0.08);
+  --color-coral-glow: rgba(244, 127, 71, 0.1);
+  --color-coral-border: rgba(244, 127, 71, 0.32);
 }
 
 /* ---------------------------------------------------------------------------
@@ -149,6 +156,17 @@ body {
     transparent 0%,
     var(--color-border) 14%,
     var(--color-border) 86%,
+    transparent 100%
+  );
+}
+
+.section-break-accent {
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-coral-border) 18%,
+    var(--color-border) 50%,
+    var(--color-coral-border) 82%,
     transparent 100%
   );
 }

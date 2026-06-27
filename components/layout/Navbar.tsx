@@ -20,7 +20,7 @@ const nav: { key: NavKey; href: string }[] = [
   { key: "events", href: "/events" },
   { key: "cities", href: "/cities" },
   { key: "ambassadors", href: "/ambassadors" },
-  { key: "gallery", href: "/gallery" },
+  // { key: "gallery", href: "/gallery" },
   { key: "about", href: "/about" },
 ];
 

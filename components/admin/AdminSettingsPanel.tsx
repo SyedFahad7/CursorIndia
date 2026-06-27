@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/Button";
 import { Card } from "@/components/ui/Card";
 import { Heading } from "@/components/ui/Heading";
 import { Text } from "@/components/ui/Text";
+import { adminInputClass, adminSectionBar } from "@/components/admin/adminStyles";
 
 export interface AdminSettingsState {
   city: {
@@ -44,8 +45,7 @@ interface AdminSettingsPanelProps {
   onSaved: (next: AdminSettingsState) => void;
 }
 
-const inputClass =
-  "h-10 w-full rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-bg)] px-3 text-sm text-[var(--color-text)] outline-none focus-visible:ring-2 focus-visible:ring-[var(--color-accent)]";
+const inputClass = adminInputClass;
 
 export function AdminSettingsPanel({ city, initial, onSaved }: AdminSettingsPanelProps) {
   const [data, setData] = useState(initial);
@@ -232,9 +232,12 @@ export function AdminSettingsPanel({ city, initial, onSaved }: AdminSettingsPane
 
       <Card className="flex flex-col gap-5 p-5 md:p-6">
         <div>
-          <Heading level={2} size="md">
-            City & Luma calendar
-          </Heading>
+          <div className="flex items-center gap-2.5">
+            <span className={adminSectionBar} aria-hidden />
+            <Heading level={2} size="md">
+              City & Luma calendar
+            </Heading>
+          </div>
           <Text variant="muted" className="mt-1 text-sm">
             Once saved, your events (upcoming + past) sync automatically — about 1 minute after
             you publish on Luma.
@@ -295,9 +298,12 @@ export function AdminSettingsPanel({ city, initial, onSaved }: AdminSettingsPane
       {data.ambassador ? (
         <Card className="flex flex-col gap-5 p-5 md:p-6">
           <div>
-            <Heading level={2} size="md">
-              Your profile
-            </Heading>
+            <div className="flex items-center gap-2.5">
+              <span className={adminSectionBar} aria-hidden />
+              <Heading level={2} size="md">
+                Your profile
+              </Heading>
+            </div>
             <Text variant="muted" className="mt-1 text-sm">
               Shown on /ambassadors and your city page.
             </Text>
