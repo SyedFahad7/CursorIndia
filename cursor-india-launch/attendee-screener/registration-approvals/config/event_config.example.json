@@ -1,0 +1,43 @@
+{
+  "event_name": "Cursor Meetup — City",
+  "capacity": 80,
+  "model": "claude-haiku-4-5",
+  "event_context": {
+    "format": "Short workflow demos, Cursor talk/AMA, networking.",
+    "prioritize": [
+      "Builders who describe concrete Cursor workflows (rules, agents, MCP, etc.)",
+      "People shipping real products or tools others use",
+      "Engineers and technical founders who can contribute to discussion"
+    ],
+    "deprioritize": [
+      "Spam, gibberish, or empty one-word answers",
+      "Recruiters / sales / BD prospecting attendees",
+      "Obvious copy-paste / LLM boilerplate with no personal detail"
+    ],
+    "notes": "Illustrative defaults for a builder meetup — edit per event. Missing social links alone is not a decline reason."
+  },
+  "fields": {
+    "github": "What is your GitHub URL?",
+    "linkedin": "LinkedIn profile link",
+    "x": "X (Twitter) link",
+    "company": "Company name",
+    "role": "Role",
+    "building": "What are you building with Cursor?",
+    "question": "Any questions for the Cursor team?",
+    "showcase": "Would you like to showcase any cool workflows in how you use Cursor? If yes, please explain what you'd like to showcase.",
+    "how_heard": "How did you hear about this?"
+  },
+  "field_weights": {
+    "github": 3,
+    "showcase": 3,
+    "company": 2,
+    "role": 2,
+    "question": 2,
+    "x": 1,
+    "how_heard": 0
+  },
+  "allowlist": {
+    "domains": ["anysphere.co", "cursor.com"],
+    "emails": []
+  }
+}

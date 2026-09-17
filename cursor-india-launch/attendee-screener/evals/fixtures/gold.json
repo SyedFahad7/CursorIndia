@@ -1,0 +1,35 @@
+{
+  "persona": "cursor-dev",
+  "cases": [
+    {
+      "email": "asha.builder@example.com",
+      "expectedDecision": "accept",
+      "expectAiSlop": false,
+      "notes": "Specific builder answers + strong GitHub"
+    },
+    {
+      "email": "generic.ai@example.com",
+      "expectedDecision": "reject",
+      "expectAiSlop": true,
+      "notes": "Classic AI slop essay, no profiles"
+    },
+    {
+      "email": "neha.founder@example.com",
+      "expectedDecision": "waitlist",
+      "expectAiSlop": false,
+      "notes": "Real founder but weak GitHub for cursor-dev persona"
+    },
+    {
+      "email": "copypaste@example.com",
+      "expectedDecision": "reject",
+      "expectAiSlop": true,
+      "notes": "Bullet-farm + hyphen slop"
+    },
+    {
+      "email": "student.dev@example.com",
+      "expectedDecision": "accept",
+      "expectAiSlop": false,
+      "notes": "Specific student builder with GitHub"
+    }
+  ]
+}

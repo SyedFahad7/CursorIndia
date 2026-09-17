@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Cursor India Buildathon — Option A (Working Draft)</title>
+<style>
+  :root {
+    --bg: #0d0d0f;
+    --panel: #161619;
+    --panel-2: #1c1c20;
+    --stroke: #2a2a30;
+    --text: #ededf0;
+    --text-2: #b4b4bd;
+    --text-3: #85858f;
+    --accent: #6db1ff;
+    --warn: #e0a23a;
+    --ok: #5cba7d;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    font-size: 15px;
+  }
+  .wrap { max-width: 940px; margin: 0 auto; padding: 48px 28px 80px; }
+  .kicker { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .8px; text-transform: uppercase; }
+  h1 { font-size: 30px; margin: 8px 0 6px; letter-spacing: -.3px; }
+  h2 { font-size: 20px; margin: 40px 0 12px; letter-spacing: -.2px; }
+  h3 { font-size: 15px; margin: 0 0 8px; }
+  p { color: var(--text-2); margin: 8px 0; }
+  .lead { max-width: 720px; }
+  b, strong { color: var(--text); }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .grid { display: grid; gap: 14px; }
+  .g2 { grid-template-columns: 1fr 1fr; }
+  .g3 { grid-template-columns: 1fr 1fr 1fr; }
+  .g4 { grid-template-columns: repeat(4, 1fr); }
+  .card { background: var(--panel); border: 1px solid var(--stroke); border-radius: 10px; padding: 14px 16px; }
+  .card h3 { font-size: 12px; text-transform: uppercase; letter-spacing: .5px; color: var(--text-3); font-weight: 700; }
+  .card p { font-size: 13.5px; margin: 6px 0 0; }
+  .stat { background: var(--panel); border: 1px solid var(--stroke); border-radius: 10px; padding: 14px; }
+  .stat .v { font-size: 24px; font-weight: 700; }
+  .stat .l { font-size: 12px; color: var(--text-3); margin-top: 2px; }
+  .stat.info .v { color: var(--accent); }
+  .stat.ok .v { color: var(--ok); }
+  .callout { border: 1px solid var(--stroke); border-left-width: 3px; border-radius: 8px; padding: 12px 16px; margin: 14px 0; background: var(--panel-2); }
+  .callout .t { font-weight: 700; margin-bottom: 4px; }
+  .callout p { margin: 0; font-size: 13.5px; }
+  .callout.info { border-left-color: var(--accent); }
+  .callout.warn { border-left-color: var(--warn); }
+  .callout.neutral { border-left-color: var(--text-3); }
+  .pill { display: inline-block; border: 1px solid var(--stroke); border-radius: 999px; padding: 3px 10px; font-size: 12px; color: var(--text-2); margin: 3px 4px 3px 0; }
+  .pill.on { background: var(--accent); color: #06121f; border-color: var(--accent); font-weight: 600; }
+  table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 13.5px; }
+  th, td { text-align: left; padding: 7px 10px; border-bottom: 1px solid var(--stroke); }
+  th { color: var(--text-3); font-weight: 600; font-size: 12px; text-transform: uppercase; letter-spacing: .4px; }
+  td:first-child { color: var(--text); white-space: nowrap; }
+  ul { margin: 6px 0; padding-left: 18px; }
+  li { color: var(--text-2); font-size: 13.5px; margin: 4px 0; }
+  .funnel { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+  .fstage { background: var(--panel-2); border: 1px solid var(--stroke); border-radius: 8px; padding: 12px; }
+  .fstage.on { border-color: var(--accent); background: #17222f; }
+  .fstage .s { font-size: 11px; font-weight: 700; color: var(--text-3); text-transform: uppercase; }
+  .fstage .ft { font-weight: 700; margin: 3px 0; font-size: 14px; }
+  .fstage .fd { font-size: 12px; color: var(--text-2); }
+  .fstage .fv { font-size: 12px; font-weight: 700; color: var(--text-2); margin-top: 6px; }
+  .fstage.on .fv { color: var(--accent); }
+  .divider { height: 1px; background: var(--stroke); margin: 34px 0; border: 0; }
+  .foot { color: var(--text-3); font-size: 11px; margin-top: 40px; }
+  @media (max-width: 720px) { .g2, .g3, .g4, .funnel { grid-template-columns: 1fr; } }
+  @media print {
+    body { background: #fff; color: #111; }
+    .wrap { padding: 0; max-width: 100%; }
+    .card, .stat, .callout, .fstage { break-inside: avoid; }
+    h2 { break-after: avoid; }
+    a { color: #1a5fb4; }
+    :root { --text:#111; --text-2:#333; --text-3:#666; --panel:#f6f6f7; --panel-2:#f0f0f2; --stroke:#d9d9de; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="kicker">Option A · Working Draft · Confidential</div>
+  <h1>Cursor India Buildathon</h1>
+  <p class="lead">A ~1-week online build sprint, <b>judged entirely internally</b> (no public voting), where the shortlisted finalists are brought to the Bangalore flagship to demo live on stage — and the full prize giveaway happens there. The online buildathon is the campaign; Bangalore is the grand finale.</p>
+
+  <div class="callout neutral">
+    <div class="t">How to read this</div>
+    <p>This is an <b>options menu, not a fixed plan</b>. Fahad (ambassador) is putting the levers on the table so the Cursor team can pick what fits. Almost everything below — prizes, platform, dates, budget — is a choice left deliberately open.</p>
+  </div>
+
+  <div class="grid g4" style="margin-top:18px">
+    <div class="stat"><div class="v">~1 wk</div><div class="l">Build window</div></div>
+    <div class="stat info"><div class="v">100%</div><div class="l">Internal judging</div></div>
+    <div class="stat ok"><div class="v">Top ~8</div><div class="l">Demo live in Bangalore</div></div>
+    <div class="stat ok"><div class="v">₹5k</div><div class="l">Travel / person (optional)</div></div>
+  </div>
+
+  <div class="callout warn">
+    <div class="t">Decision: no public / community voting</div>
+    <p>Public voting is gameable — finalists rally friends to mass-upvote, so the loudest network wins, not the best build. We judge <b>100% internally</b> (Cursor team + ambassadors, on a fixed rubric). Fairer, on-brand for a "serious builders" event, and keeps quality high.</p>
+  </div>
+
+  <h2>Internally judged, ending in a live Bangalore finale</h2>
+  <div class="funnel">
+    <div class="fstage"><div class="s">Stage 1</div><div class="ft">Submit</div><div class="fd">Public demo link + 1-min video + repo. Low bar = high volume.</div><div class="fv">All entries</div></div>
+    <div class="fstage"><div class="s">Stage 2</div><div class="ft">Ambassador screen</div><div class="fd">Ambassadors (and agents) split entries into rooms; rubric-score to a longlist.</div><div class="fv">→ Top ~25</div></div>
+    <div class="fstage on"><div class="s">Stage 3</div><div class="ft">Panel picks finalists</div><div class="fd">Small Cursor + ambassador panel reviews finalist videos, picks who comes in.</div><div class="fv">→ Top ~8</div></div>
+    <div class="fstage"><div class="s">Stage 4</div><div class="ft">Live demos @ Bangalore</div><div class="fd">Finalists demo on stage Aug 1; winners + giveaway announced live.</div><div class="fv">Winners on stage</div></div>
+  </div>
+
+  <h2>Timeline — two scenarios, both landing at Bangalore (Aug 1)</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Best case — kickoff Jul 11 (preferred)</h3>
+      <table>
+        <tr><th>When</th><th>What</th></tr>
+        <tr><td>Jul 11 (Fri)</td><td>Buildathon kicks off online</td></tr>
+        <tr><td>Jul 11–19</td><td>~1 week build window</td></tr>
+        <tr><td>Jul 19 (Sat)</td><td>Submission deadline</td></tr>
+        <tr><td>Jul 20–25</td><td>Internal judging → finalists locked</td></tr>
+        <tr><td>~Jul 26</td><td>Finalists announced (~5+ days to book)</td></tr>
+        <tr><td>Aug 1</td><td>Live demos + full giveaway at Bangalore</td></tr>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Worst case — kickoff Jul 18 (tight)</h3>
+      <table>
+        <tr><th>When</th><th>What</th></tr>
+        <tr><td>Jul 18 (Fri)</td><td>Buildathon kicks off online</td></tr>
+        <tr><td>Jul 18–26</td><td>~1 week build window</td></tr>
+        <tr><td>Jul 26 (Sat)</td><td>Submission deadline</td></tr>
+        <tr><td>Jul 27–28</td><td>Fast internal judging</td></tr>
+        <tr><td>~Jul 29</td><td>Finalists announced (~3 days to book)</td></tr>
+        <tr><td>Aug 1</td><td>Live demos + full giveaway at Bangalore</td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="callout warn">
+    <div class="t">The one hard constraint</div>
+    <p>Finalists need <b>~3 days minimum</b> to book train travel before Aug 1, so finalists must be announced by <b>~Jul 29</b>. The earlier we kick off (Jul 11–14), the safer the booking window. Roadshow runs in parallel: Jul 25 start · Jul 30 Hyderabad · Aug 1 Bangalore.</p>
+  </div>
+
+  <h2>Bangalore is where the prizes happen</h2>
+  <p class="lead">The other city events (Mumbai, Delhi, Hyderabad) exist mainly to <b>push people to start building</b> and enter the buildathon. The <b>complete prize giveaway happens only at Bangalore</b>: internally-picked finalists demo live, and winners are announced in the room. Same model as Algorand "Change the Game" — virtual hack, then finalists invited to an in-person Grandmaster Demo Day.</p>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Why finalists demo live (not just winners)</h3>
+      <ul>
+        <li>Fills the Bangalore stage with real builders → more energy, more content.</li>
+        <li>The trip itself is a reward — "finalist flown to Bangalore" is prestige.</li>
+        <li>Live winner reveal = the viral moment (giant-cheque photo, applause).</li>
+        <li>Judging already done internally; stage demo confirms + adds theatre.</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3>How many finalists to bring (open)</h3>
+      <p>Recommend <b>Top 8 projects</b> — enough for a full stage session, still affordable. Team decides the exact number.</p>
+      <div style="margin-top:8px"><span class="pill">5 = leanest</span><span class="pill on">8 = recommended</span><span class="pill">10 = biggest</span></div>
+    </div>
+  </div>
+
+  <h2>Prizes <span style="font-size:13px;color:var(--text-3);font-weight:400">— all optional, team's call</span></h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Podium (recommended core)</h3>
+      <div><span class="pill on">1st</span><span class="pill on">2nd</span><span class="pill on">3rd</span></div>
+      <p>Simple 1st / 2nd / 3rd, awarded on stage at Bangalore. The only tier I'd call essential — everything else is optional.</p>
+    </div>
+    <div class="card">
+      <h3>Category add-ons (optional)</h3>
+      <div><span class="pill">Best use of Background Agents</span><span class="pill">Best use of a specific feature</span><span class="pill">Best Student</span></div>
+      <p>Add any, all, or none. (Deliberately no "first-time builder" category.)</p>
+    </div>
+  </div>
+  <div class="callout info">
+    <div class="t">Cash pool is optional too</div>
+    <p>We don't need a big cash prize pool. A large <b>credits giveaway</b> (Cursor plan credits + partner credits) works just as well — arguably better for a dev audience. Options, all open: (a) modest cash for Top 3 + big credits, (b) credits-only, or (c) cash + credits + travel. Covering travel is itself a strong reward, so cash can stay small.</p>
+  </div>
+
+  <h2>Money model — optional lever</h2>
+  <div class="grid g2">
+    <div class="card">
+      <h3>Travel support (optional)</h3>
+      <p>Flat <b>₹5,000 per finalist</b> toward train travel to Bangalore — same per-person rate whether solo or team (team of 3 = ₹15,000). Reimbursed against tickets, trains-first.</p>
+      <p style="color:var(--text-3)">Modest cost: 8 finalist projects ≈ 8–20 people ≈ ₹40k–1L total — far cheaper than flights, and the highest-goodwill spend in the budget.</p>
+    </div>
+    <div class="card">
+      <h3>Precedents for travel-covered finalists</h3>
+      <ul>
+        <li>Algorand flies track winners to an in-person finale to pitch on the main stage.</li>
+        <li>ETHGlobal offers travel credits + gas reimbursements; finalists demo on stage.</li>
+        <li>ETHIndia runs a travel-reimbursement policy for accepted hackers.</li>
+        <li>Cursor Vancouver's prize included a Web Summit ticket per team member.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Where registrations & submissions live <span style="font-size:13px;color:var(--text-3);font-weight:400">— pick one, all viable</span></h2>
+  <div class="grid g3">
+    <div class="card">
+      <h3>Devfolio (managed)</h3>
+      <p>India-native. Best-in-class judging (rubric auto-normalization, judge rooms, sponsor judging) + free microsite. Least setup effort.</p>
+    </div>
+    <div class="card">
+      <h3>Devpost (reach)</h3>
+      <p>Biggest global reach — what Bolt used for the "World's Largest Hackathon." Good if we want "largest" optics + easy discovery.</p>
+    </div>
+    <div class="card">
+      <h3>Our own website (custom)</h3>
+      <p>Take registrations ourselves, fully branded and bespoke. We control the experience and can wire in <b>agents to pre-screen submissions</b> and assist judging later. More build effort, most flexibility. (Fahad can build this.)</p>
+    </div>
+  </div>
+
+  <h2>Proof this works — Cursor hackathons worldwide</h2>
+  <div class="grid g3">
+    <div class="card">
+      <h3>Hamburg — 400+ builders</h3>
+      <p>"Germany's largest AI hackathon," $300k+ perks, stacked partner tracks, on-stage finalist demos.</p>
+      <p><a href="https://luma.com/hl7wv7k3">Luma</a> · <a href="https://www.cursorgermany.com/recaps/cursor-hamburg-2026-01-31">Recap · 68 photos</a></p>
+    </div>
+    <div class="card">
+      <h3>Singapore — 147 projects</h3>
+      <p>First official 24h Cursor hackathon, $100k+ cash + credits. 147 projects → 15 finalists via demo videos → stage demos.</p>
+      <p><a href="https://luma.com/cursor-hack-sg">Luma</a> · <a href="https://www.businessinsider.com/inside-24-hour-cursor-vibe-coding-hackathon-singapore-ai-tech-2025-10">Business Insider</a></p>
+    </div>
+    <div class="card">
+      <h3>Vancouver &amp; more</h3>
+      <p>Vancouver's grand prize = Cursor credit + Web Summit ticket per member — a travel/experience prize, exactly our model.</p>
+      <p><a href="https://cursor-hackathon-vancouver.devpost.com/">Vancouver (Devpost)</a> · <a href="https://cursor-hackathon.devpost.com/">Cursor Hackathon (Devpost)</a></p>
+    </div>
+  </div>
+
+  <hr class="divider" />
+
+  <div class="grid g2">
+    <div>
+      <h3>Open choices for the team</h3>
+      <ul>
+        <li>Kickoff date — push for Jul 11–14 so travel booking is safe.</li>
+        <li>Prizes — podium only, or add category prizes (Background Agents / feature / student).</li>
+        <li>Cash vs credits vs travel mix — all on the table.</li>
+        <li>Platform — Devfolio / Devpost / our own custom site.</li>
+        <li>How many finalists fly in: 5 / 8 / 10 (recommend 8).</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Risks &amp; mitigations</h3>
+      <ul>
+        <li>Public-vote gaming → removed entirely; internal rubric judging only.</li>
+        <li>Booking crunch → announce finalists by ~Jul 29; kick off earlier if possible.</li>
+        <li>Finalist can't travel → keep a runner-up on standby; allow remote demo fallback.</li>
+        <li>Judging load → ambassador rooms + video-first + agents pre-screen + partner-judged tracks.</li>
+        <li>Clash with Delhi hack → buildathon is the umbrella; Delhi projects can enter it.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="foot">Confidential — internal working draft for the Cursor India launch. Not for external sharing.</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,17 @@
+# Allowlist cheat-sheet. Scripts do not read this file.
+# Copy the entries needed for an event into event_config.json.
+#
+# One entry per line:
+#   - `foo.com`                → any email ending @foo.com
+#   - `person@example.com`     → exact email match
+#   - `# ...`                  → comment
+#
+# Keep this list small. Typical uses: Cursor team domains, confirmed speakers,
+# people you want in regardless of form quality.
+
+# Cursor team
+anysphere.co
+cursor.com
+
+# Known-good emails (add per event as needed)
+

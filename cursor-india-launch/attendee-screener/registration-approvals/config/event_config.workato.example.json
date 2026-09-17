@@ -1,0 +1,38 @@
+{
+  "event_name": "Cursor × Workato — Hyderabad",
+  "capacity": 55,
+  "model": "claude-haiku-4-5",
+  "event_context": {
+    "format": "Cursor × Workato workshop: AI workflows, automation demos, networking. Hyderabad.",
+    "prioritize": [
+      "Professionals shipping real AI/automation workflows (Workato, Cursor, agents, MCP, RAG)",
+      "People with concrete showcase ideas tied to enterprise ops, integrations, or production systems",
+      "Engineers at product/tech companies who can contribute to discussion"
+    ],
+    "deprioritize": [
+      "Spam, gibberish, or empty one-word answers",
+      "Recruiters / sales / BD prospecting attendees",
+      "Obvious copy-paste / LLM boilerplate with no personal detail",
+      "Pure students with college-only context and no shipped work (unless showcase is exceptional)"
+    ],
+    "notes": "Missing LinkedIn alone is not a decline reason. Prefer builders over attendees who only want to learn."
+  },
+  "fields": {
+    "linkedin": "What's your LinkedIn/X profile?",
+    "company": "Organization/Company do you work for?",
+    "role": "Organization/Company do you work for?",
+    "building": "What's one AI workflow or project you'd love to build/showcase?",
+    "showcase": "What's one AI workflow or project you'd love to build/showcase?"
+  },
+  "field_weights": {
+    "showcase": 3,
+    "building": 3,
+    "company": 2,
+    "role": 1,
+    "linkedin": 1
+  },
+  "allowlist": {
+    "domains": ["anysphere.co", "cursor.com", "workato.com"],
+    "emails": []
+  }
+}

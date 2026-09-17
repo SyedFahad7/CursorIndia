@@ -1,0 +1,24 @@
+{
+  "event_name": "Cursor Meetup — Hyderabad",
+  "capacity": 55,
+  "drop_declined": true,
+  "apply_capacity": true,
+  "event_context": {
+    "format": "Workflow demos, Cursor talk/AMA, networking.",
+    "prioritize": [
+      "Builders who describe concrete Cursor/AI workflows (agents, MCP, automation)",
+      "People shipping real products or tools others use",
+      "Engineers and technical founders who can contribute to discussion"
+    ],
+    "deprioritize": [
+      "Spam, gibberish, or empty one-word answers",
+      "Recruiters / sales / BD prospecting attendees",
+      "Obvious copy-paste / LLM boilerplate with no personal detail"
+    ],
+    "notes": "Missing social links alone is not a decline reason. Prefer professionals with concrete showcase ideas."
+  },
+  "allowlist": {
+    "domains": ["anysphere.co", "cursor.com", "workato.com"],
+    "emails": []
+  }
+}

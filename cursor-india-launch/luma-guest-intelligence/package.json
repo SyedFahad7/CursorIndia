@@ -1,0 +1,26 @@
+{
+  "name": "luma-guest-intelligence",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Luma → Workato → Notion → Cursor batch guest screener for event demos",
+  "type": "module",
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "tsx src/server.ts",
+    "start": "tsx src/server.ts",
+    "typecheck": "tsc --noEmit",
+    "demo:seed": "tsx scripts/seed-demo.ts"
+  },
+  "dependencies": {
+    "@cursor/sdk": "^1.0.23",
+    "dotenv": "^17.2.1",
+    "zod": "^4.0.14"
+  },
+  "devDependencies": {
+    "@types/node": "^22.16.5",
+    "tsx": "^4.20.3",
+    "typescript": "^5.9.2"
+  }
+}

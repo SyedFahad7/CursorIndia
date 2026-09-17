@@ -1,0 +1,18 @@
+node_modules/
+dist/
+out/
+.env
+.env.local
+event_config.json
+*.log
+.cache/
+.DS_Store
+
+# registration-approvals run artifacts (guest PII)
+registration-approvals/runs/
+*.sorted.csv
+*.scored.csv
+*.summary.md
+approve.csv
+decline.csv
+batch/

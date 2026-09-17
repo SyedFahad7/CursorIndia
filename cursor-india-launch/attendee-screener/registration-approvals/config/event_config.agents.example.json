@@ -1,0 +1,41 @@
+{
+  "event_name": "Give Your Agent a Brain — ADK / MCP / Persistent Memory — Hyderabad",
+  "capacity": 80,
+  "model": "claude-haiku-4-5",
+  "event_context": {
+    "format": "Hands-on agents workshop: ADK, MCP, persistent memory. Short demos + build time. Hyderabad.",
+    "prioritize": [
+      "Professionals actively building agents with concrete tools/stack",
+      "People describing real memory/MCP/tool-use problems",
+      "Builders who can ship or demo during/after the session"
+    ],
+    "deprioritize": [
+      "Spam, gibberish, or empty learn-more-only answers",
+      "Recruiters / sales / BD prospecting attendees",
+      "Obvious AI-slop boilerplate with no personal project detail"
+    ],
+    "notes": "Form is LinkedIn-heavy; missing GitHub alone is not a decline reason."
+  },
+  "fields": {
+    "linkedin": "What is your LinkedIn profile?",
+    "company": "Are you?",
+    "role": "Are you?",
+    "building": "What kind of AI agent are you building?",
+    "question": "Why do you want to join this event?",
+    "showcase": "What kind of AI agent are you building?",
+    "how_heard": "How did you hear about us?"
+  },
+  "field_weights": {
+    "showcase": 3,
+    "building": 3,
+    "question": 2,
+    "company": 2,
+    "role": 1,
+    "linkedin": 1,
+    "how_heard": 0
+  },
+  "allowlist": {
+    "domains": ["anysphere.co", "cursor.com"],
+    "emails": []
+  }
+}

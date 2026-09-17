@@ -1,0 +1,26 @@
+{
+  "event_name": "Cursor India Roadshow — Hyderabad",
+  "capacity": 9999,
+  "drop_declined": true,
+  "apply_capacity": false,
+  "event_context": {
+    "format": "Large Cursor India Roadshow in Hyderabad: demos, talks, networking. Professional builders preferred.",
+    "prioritize": [
+      "Working professionals (engineers, founders, PMs, designers) who use Cursor in real work",
+      "Concrete answers about what they build — shipped products, production workflows, agents, MCP",
+      "People with credible company + job title and LinkedIn/GitHub",
+      "Showcase-ready Cursor workflows"
+    ],
+    "deprioritize": [
+      "Students / college-only profiles (even if they slipped past heuristics)",
+      "Empty, one-word, or pure learn-only answers with no building signal",
+      "Recruiters / sales / BD prospecting",
+      "Obvious AI-slop boilerplate with no personal project detail"
+    ],
+    "notes": "No hard capacity cut in this run — recommend accept/decline only. Prefer professionals. Missing GitHub alone is not a decline if answers + LinkedIn are strong."
+  },
+  "allowlist": {
+    "domains": ["anysphere.co", "cursor.com"],
+    "emails": []
+  }
+}
